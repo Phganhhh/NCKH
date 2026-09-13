@@ -1,6 +1,83 @@
 /* Styles cho WebAR client */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101418;
+  color: #f2f2f2;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #e4b363;
+}
+
+.step img {
+  max-width: 100%;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  background: #e4b363;
+  color: #101418;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a {
+  color: #e4b363;
+}
+
+/* Trang AR: camera + canvas phủ toàn màn hình */
+.ar-page {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.ar-container {
+  position: absolute;
+  inset: 0;
+}
+
+.ar-status {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 14px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ar-back {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 14px;
+  text-decoration: none;
 }
