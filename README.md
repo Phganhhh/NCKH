@@ -1,36 +1,77 @@
-# Dự án WebAR Hát Xoan Phú Thọ
+﻿# WebAR Hát Xoan Phú Thọ
 
-Ứng dụng công nghệ WebAR để số hóa và nâng cao trải nghiệm di sản Hát Xoan Phú Thọ.
+POC WebAR số hóa và nâng cao trải nghiệm di sản Hát Xoan Phú Thọ.
 
-## Cấu trúc dự án
+## Luồng chính
 
+```text
+Poster vật lý
+→ QR
+→ Website
+→ Camera
+→ MindAR image tracking
+→ 3 poster ảo carousel
+→ Chọn bài
+→ Video biểu diễn
+→ Chatbot RAG context-aware
+→ Nguồn tài liệu
 ```
-AI_NCKH/
-├── client/                 # Web Frontend (Module 1 & 2)
-│   ├── assets/             # Hình ảnh, video, audio, target files
-│   ├── css/
-│   ├── js/
-│   │   ├── ar/             # MindAR + A-Frame logic
-│   │   ├── ui/             # UI + chat widget
-│   │   ├── api.js          # Gọi backend
-│   │   └── app.js          # Entry point
+
+## Cấu trúc project
+
+```text
+NCKH/
+├── frontend/
+│   ├── public/
+│   │   ├── targets/
+│   │   ├── posters/
+│   │   ├── videos/
+│   │   └── images/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── state/
+│   │   ├── styles/
+│   │   └── data/
 │   └── index.html
 │
-└── server/                 # RAG Chatbot Backend (Module 3)
-    ├── app.py
-    ├── main.py
-    ├── requirements.txt
-    ├── config.py
-    ├── .env.example
-    ├── README.md
-    ├── data/               # Tài liệu tri thức Hát Xoan
-    ├── rag/                # RAG pipeline
-    ├── api/                # FastAPI routes
-    ├── models/             # Pydantic schemas
-    └── tests/              # Unit tests
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── models/
+│   │   ├── services/
+│   │   ├── rag/
+│   │   ├── database/
+│   │   └── data/
+│   ├── tests/
+│   ├── main.py
+│   └── config.py
+│
+├── docs/
+│   ├── MODULE_INDEX.md
+│   ├── STATUS.md
+│   └── modules/
+│
+├── PLAN.md
+└── CLAUDE.md
 ```
 
-## Tài liệu chi tiết
+## Tài liệu
 
-- [PLAN.md](PLAN.md): Phân tích yêu cầu và thiết kế kiến trúc
-- [server/README.md](server/README.md): Hướng dẫn Module AI
+- [PLAN.md](PLAN.md): thiết kế tổng thể và kế hoạch 8 tuần
+- [docs/MODULE_INDEX.md](docs/MODULE_INDEX.md): danh sách module và trạng thái
+- [docs/STATUS.md](docs/STATUS.md): trạng thái hiện tại của dự án
+- [backend/README.md](backend/README.md): hướng dẫn backend RAG
+
+## Quy trình làm theo module
+
+Mỗi tuần/module có một checklist riêng trong `docs/modules/`.
+
+Nguyên tắc:
+
+1. Đọc `docs/STATUS.md`
+2. Đọc checklist module hiện tại
+3. Làm việc trong `docs/modules/MODULE_xx...md`
+4. Pass Gate mới sang module sau
+5. Cập nhật `docs/STATUS.md` và `docs/MODULE_INDEX.md`

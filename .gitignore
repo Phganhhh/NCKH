@@ -1,4 +1,4 @@
-# Python
+﻿# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -9,6 +9,10 @@ venv/
 
 # Vector DB
 chroma_db/
+
+# Node
+node_modules/
+frontend/dist/
 
 # IDE
 .vscode/
