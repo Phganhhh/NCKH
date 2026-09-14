@@ -2,8 +2,8 @@
 
 | Module | Tên | Trạng thái | Gate | Checklist |
 |---|---|---|---|---|
-| 01 | Web + Image Tracking | 🟡 In review | Not passed | [MODULE_01_WEB_IMAGE_TRACKING.md](modules/MODULE_01_WEB_IMAGE_TRACKING.md) |
-| 02 | 3 Virtual Posters | ⬜ Not started | Not passed | [MODULE_02_3_VIRTUAL_POSTERS.md](modules/MODULE_02_3_VIRTUAL_POSTERS.md) |
+| 01 | Web + Image Tracking | ✅ Done | Passed 2026-09-14 | [MODULE_01_WEB_IMAGE_TRACKING.md](modules/MODULE_01_WEB_IMAGE_TRACKING.md) |
+| 02 | 3 Virtual Posters | 🔵 Doing | Not passed | [MODULE_02_3_VIRTUAL_POSTERS.md](modules/MODULE_02_3_VIRTUAL_POSTERS.md) |
 | 03 | Carousel Interaction | ⬜ Not started | Not passed | [MODULE_03_CAROUSEL_INTERACTION.md](modules/MODULE_03_CAROUSEL_INTERACTION.md) |
 | 04 | Video Experience | ⬜ Not started | Not passed | [MODULE_04_VIDEO_EXPERIENCE.md](modules/MODULE_04_VIDEO_EXPERIENCE.md) |
 | 05 | Database + Backend | ⬜ Not started | Not passed | [MODULE_05_DATABASE_BACKEND.md](modules/MODULE_05_DATABASE_BACKEND.md) |
