@@ -19,6 +19,9 @@ export default function Home() {
           Lớp AR overlay sẽ xuất hiện trên poster.
         </p>
         <Link className="button" to="/ar">Vào trải nghiệm AR</Link>
+        <p>
+          <Link to="/ar?demo=1">Xem trước giao diện sau khi quét (chế độ demo, không cần camera)</Link>
+        </p>
       </section>
     </main>
   );

@@ -57,6 +57,17 @@ a {
   inset: 0;
 }
 
+/* Chế độ demo: nền tối, poster nằm trong scene three */
+.ar-demo {
+  background: #23272b;
+}
+
+.ar-demo canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .ar-status {
   position: absolute;
   left: 50%;

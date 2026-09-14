@@ -6,14 +6,17 @@ const AR_STATUS_TEXT = {
   loading: "Đang tải mô hình AR...",
   scanning: "Đang dò poster... hướng camera vào poster đã in.",
   found: "Đã nhận diện poster — AR overlay đang hiển thị.",
+  demo: "Chế độ demo: giao diện sau khi quét (không dùng camera).",
   error: "Lỗi khởi động AR. Kiểm tra kết nối HTTPS rồi tải lại trang."
 };
 
 export default function ARExperience() {
-  const [permission, setPermission] = useState("asking");
+  const isDemo = new URLSearchParams(window.location.search).has("demo");
+  const [permission, setPermission] = useState(isDemo ? "granted" : "asking");
   const [arStatus, setArStatus] = useState("loading");
 
   useEffect(() => {
+    if (isDemo) return undefined;
     let cancelled = false;
 
     async function requestCamera() {
@@ -41,7 +44,7 @@ export default function ARExperience() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isDemo]);
 
   if (permission !== "granted") {
     return (
@@ -65,7 +68,7 @@ export default function ARExperience() {
 
   return (
     <main className="ar-page">
-      <ARScene onStatus={setArStatus} />
+      <ARScene demo={isDemo} onStatus={setArStatus} />
       <p className="ar-status">{AR_STATUS_TEXT[arStatus]}</p>
       <Link to="/" className="ar-back">← Về trang chủ</Link>
     </main>
