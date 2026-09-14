@@ -666,25 +666,6 @@ poster animation
 * responsive
 * dễ debug
 
----
-
-## Cách 2 — Gesture trong Three.js
-
-Ví dụ:
-
-```text
-Touch
- ↓
-Raycaster
- ↓
-3D Object
- ↓
-drag
-```
-
-Khó hơn.
-
-Không cần thiết cho POC.
 
 ---
 
@@ -775,36 +756,6 @@ Assets
 └── Audio
 ```
 
-MindAR phù hợp với phần image-tracking; Three.js phụ trách rendering/3D. Bạn không còn cần WebXR Plane Detection cho flow chính nữa.
-
-Đây là một lợi thế lớn vì WebXR/AR hiện vẫn có khác biệt hỗ trợ đáng kể giữa trình duyệt. Dữ liệu tương thích hiện tại cho thấy Chrome Android hỗ trợ WebXR AR/hit-test, trong khi Safari trên iOS vẫn không hỗ trợ WebXR AR theo bảng hỗ trợ hiện tại. ([Can I Use][1])
-
-**Do đó, nếu mục tiêu là "khách dùng điện thoại bất kỳ", bạn phải test thiết bị mục tiêu ngay từ đầu.**
-
----
-
-# 17. Đây là thay đổi rất quan trọng đối với kế hoạch 8 tuần
-
-Kế hoạch cũ có:
-
-```text
-Week 3
-Plane Detection
-3D scene
-WebXR
-```
-
-Tôi sẽ **xóa hoàn toàn phần này khỏi MVP**.
-
-Thay bằng:
-
-```text
-Week 3
-AR Interaction + Carousel + Video
-```
-
-Điều này giải phóng rất nhiều thời gian.
-
 ---
 
 # 18. Kế hoạch mới 8 tuần
@@ -825,7 +776,7 @@ Camera
 Scan Poster
  ↓
 AR activated
-```
+
 
 ### Day 1
 
