@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { PNG } from "pngjs";
+import jpeg from "jpeg-js";
 
 globalThis.requestAnimationFrame ??= (cb) => setTimeout(() => cb(Date.now()), 16);
 
@@ -19,7 +20,19 @@ if (!inputPath || !outputPath) {
   process.exit(1);
 }
 
-const png = PNG.sync.read(fs.readFileSync(inputPath));
+const fileBuffer = fs.readFileSync(inputPath);
+let image;
+if (fileBuffer[0] === 0x89 && fileBuffer[1] === 0x50) {
+  const png = PNG.sync.read(fileBuffer);
+  image = { width: png.width, height: png.height, data: png.data };
+} else if (fileBuffer[0] === 0xff && fileBuffer[1] === 0xd8) {
+  // điện thoại hay xuất JPEG dù đuôi file .png — đọc theo magic bytes
+  const decoded = jpeg.decode(fileBuffer, { useTArray: true, formatAsRGBA: true });
+  image = { width: decoded.width, height: decoded.height, data: decoded.data };
+} else {
+  console.error("Ảnh nguồn phải là PNG hoặc JPEG.");
+  process.exit(1);
+}
 
 class NodeCompiler extends CompilerBase {
   createProcessCanvas(img) {
@@ -51,8 +64,7 @@ class NodeCompiler extends CompilerBase {
   }
 }
 
-const image = { width: png.width, height: png.height, data: png.data };
-console.log(`Compile ${inputPath} (${png.width}x${png.height}) ...`);
+console.log(`Compile ${inputPath} (${image.width}x${image.height}) ...`);
 const compiler = new NodeCompiler();
 await compiler.compileImageTargets([image], (percent) => {
   process.stdout.write(`\r  tiến độ: ${percent.toFixed(1)}%   `);
