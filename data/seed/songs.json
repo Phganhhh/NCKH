@@ -1,0 +1,44 @@
+[
+  {
+    "id": "xoan_001",
+    "slug": "bai-xoan-1",
+    "title": "Bài Xoan 1",
+    "category": "Chặng 1 (placeholder)",
+    "short_description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE] Mô tả ngắn về bài Xoan mẫu số 1.",
+    "description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nPhần giới thiệu chi tiết của bài Xoan này sẽ được thay thế bằng nội dung có nguồn xác minh (tư liệu điền dã, hồ sơ di sản, hoặc nghiên cứu đã công bố).",
+    "lyrics": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nLời ca chưa được đưa vào hệ thống vì cần sao lục từ bản ghi có nguồn, ghi rõ người sưu tầm và dị bản.",
+    "cultural_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nÝ nghĩa văn hoá, vị trí trong chặng diễn xướng và bối cảnh nghi lễ cần được xác minh.",
+    "performance_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nThông tin về hình thức trình diễn, số lượng đào/kép, nhạc đệm và thời lượng cần được xác minh.",
+    "thumbnail_url": "/placeholders/song-1.svg",
+    "video_url": "",
+    "status": "published"
+  },
+  {
+    "id": "xoan_002",
+    "slug": "bai-xoan-2",
+    "title": "Bài Xoan 2",
+    "category": "Chặng 2 (placeholder)",
+    "short_description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE] Mô tả ngắn về bài Xoan mẫu số 2.",
+    "description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nPhần giới thiệu chi tiết của bài Xoan này sẽ được thay thế bằng nội dung có nguồn xác minh.",
+    "lyrics": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "cultural_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "performance_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "thumbnail_url": "/placeholders/song-2.svg",
+    "video_url": "",
+    "status": "published"
+  },
+  {
+    "id": "xoan_003",
+    "slug": "bai-xoan-3",
+    "title": "Bài Xoan 3",
+    "category": "Chặng 3 (placeholder)",
+    "short_description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE] Mô tả ngắn về bài Xoan mẫu số 3.",
+    "description": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]\n\nPhần giới thiệu chi tiết của bài Xoan này sẽ được thay thế bằng nội dung có nguồn xác minh.",
+    "lyrics": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "cultural_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "performance_info": "[PLACEHOLDER CONTENT – REPLACE WITH VERIFIED SOURCE]",
+    "thumbnail_url": "/placeholders/song-3.svg",
+    "video_url": "",
+    "status": "published"
+  }
+]

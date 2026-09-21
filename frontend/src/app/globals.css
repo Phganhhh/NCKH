@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-nga text-muc antialiased;
+  }
+
+  ::selection {
+    @apply bg-vang/40;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+
+  /* Focus ring nhất quán cho accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-son ring-offset-2 ring-offset-nga;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Hoa văn trống đồng cách điệu (CSS thuần, không dùng ảnh bản quyền) */
+  .pattern-heritage {
+    background-image: radial-gradient(circle at 1px 1px, rgba(158, 43, 37, 0.14) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+
+  .prose-heritage p {
+    @apply mb-4 leading-8 text-muc-soft;
+  }
+
+  .prose-heritage p:last-child {
+    @apply mb-0;
+  }
+}

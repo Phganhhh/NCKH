@@ -1,0 +1,10 @@
+[
+  { "id": "asset_001", "song_id": "xoan_001", "asset_type": "image", "url": "/placeholders/song-1.svg", "source": "PLACEHOLDER", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Ảnh đại diện placeholder cho Bài Xoan 1" },
+  { "id": "asset_002", "song_id": "xoan_001", "asset_type": "video", "url": "", "source": "PLACEHOLDER", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Video biểu diễn — chờ tư liệu có bản quyền" },
+  { "id": "asset_003", "song_id": "xoan_002", "asset_type": "image", "url": "/placeholders/song-2.svg", "source": "PLACEHOLDER", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Ảnh đại diện placeholder cho Bài Xoan 2" },
+  { "id": "asset_004", "song_id": "xoan_003", "asset_type": "image", "url": "/placeholders/song-3.svg", "source": "PLACEHOLDER", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Ảnh đại diện placeholder cho Bài Xoan 3" },
+  { "id": "asset_010", "song_id": "xoan_001", "asset_type": "ar_poster", "url": "AR_POSTER_001", "source": "AR team (Zapworks)", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Image target cho Bài Xoan 1" },
+  { "id": "asset_011", "song_id": "xoan_001", "asset_type": "ar_video", "url": "AR_VIDEO_001", "source": "AR team (Zapworks)", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Video AR cho Bài Xoan 1" },
+  { "id": "asset_012", "song_id": "xoan_002", "asset_type": "ar_video", "url": "AR_VIDEO_002", "source": "AR team (Zapworks)", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Video AR cho Bài Xoan 2" },
+  { "id": "asset_013", "song_id": "xoan_003", "asset_type": "ar_video", "url": "AR_VIDEO_003", "source": "AR team (Zapworks)", "author": "PLACEHOLDER", "license": "PLACEHOLDER", "description": "Video AR cho Bài Xoan 3" }
+]
