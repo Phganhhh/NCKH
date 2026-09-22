@@ -1629,38 +1629,6 @@
     _input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); _sendMsg(_input.value.trim()); } });
     document.querySelectorAll('.xoan-quick').forEach(b => b.addEventListener('click', () => _sendMsg(b.dataset.q || b.textContent.trim())));
 
-    $$(".quick-q").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const q = btn.textContent.trim().toLowerCase();
-        $("#chatInput").value = btn.textContent.trim();
-        showChatReply(chatbotAnswers[q] || "Bạn có thể hỏi về lịch sử, ba chặng hát, không gian diễn xướng hoặc nghệ nhân Xoan.");
-      });
-    });
-
-    $("#sendChat").addEventListener("click", () => {
-      const question = $("#chatInput").value.trim();
-      if (!question) {
-        showChatReply("Hãy nhập một câu hỏi. Ví dụ: “Hát Xoan có mấy chặng?”");
-        return;
-      }
-
-      const normalized = question.toLowerCase();
-      if (normalized.includes("mấy chặng") || normalized.includes("bao nhiêu chặng")) {
-        showChatReply(chatbotAnswers["có mấy chặng?"]);
-      } else if (normalized.includes("hát xoan là gì") || normalized.includes("xoan là gì")) {
-        showChatReply(chatbotAnswers["hát xoan là gì?"]);
-      } else {
-        showChatReply("Đây là chatbot giao diện. Khi triển khai thật, bạn có thể nối ô này với API/LLM hoặc cơ sở dữ liệu câu hỏi – đáp về Hát Xoan.");
-      }
-    });
-
-    $("#chatInput").addEventListener("keydown", (event) => {
-      if (event.key === "Enter") $("#sendChat").click();
-    });
-
-    $("#closeChat").addEventListener("click", () => {
-      $("#chatbot").classList.add("hidden");
-    });
 
     // Demo audio:
     // ===============================
@@ -1795,11 +1763,15 @@
         stopAudioUI();
 
 
-        // ===========================
-        // TẠO FILE MP3 THẬT
-        // ===========================
+        // Chuẩn hóa URL audio tuyệt đối (tương thích cả localhost và GitHub Pages /NCKH/)
+        let basePath = window.location.pathname;
+        if (!basePath.endsWith('/')) {
+          basePath = basePath.substring(0, basePath.lastIndexOf('/') + 1) || '/';
+        }
+        const fullAudioUrl = new URL(audioSrc, window.location.origin + basePath).href;
 
-        const audio = new Audio(audioSrc);
+        const audio = new Audio(fullAudioUrl);
+        audio.preload = "auto";
 
         btn._audio = audio;
 
@@ -2039,7 +2011,7 @@
     
 
     // Nút "Xem 3 nhóm tư liệu"
-    $("#filterAll").addEventListener("click", () => {
+    $("#filterAll")?.addEventListener("click", () => {
       showToast("Trang hiện tập trung vào 3 nhóm: không gian diễn xướng, truyền dạy qua thế hệ và trống – phách.");
     });
 
