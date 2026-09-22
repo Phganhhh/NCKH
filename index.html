@@ -263,42 +263,10 @@
       footer .grid { grid-template-columns:1fr !important; }
       footer { padding-bottom:18px; }
 
-      /* Thanh thao tác cố định: AR + Chatbot */
-      .mobile-action-bar {
-        display:flex !important;
-        position:fixed;
-        left:0; right:0; bottom:0;
-        z-index:90;
-        gap:8px;
-        padding:8px 10px calc(8px + env(safe-area-inset-bottom));
-        background:rgba(32,18,14,.96);
-        border-top:1px solid rgba(216,184,115,.22);
-        backdrop-filter:blur(14px);
-      }
-      .mobile-action-bar a,
-      .mobile-action-bar button {
-        flex:1;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:7px;
-        border-radius:14px;
-        padding:11px 8px;
-        font-size:12px;
-        font-weight:700;
-        color:white;
-      }
-      .mobile-action-bar .mobile-ar { background:#9B332C; }
-      .mobile-action-bar .mobile-chat { background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14); }
-
       /* Modal chiếm gần hết chiều cao nhưng vẫn có khoảng thở */
       #searchModal > div.relative { margin-top:5rem !important; }
       #arModal .relative.min-h-full { align-items:flex-end !important; }
       #arModal .relative.min-h-full > div { max-height:92dvh; overflow:auto; border-radius:26px 26px 0 0; }
-    }
-
-    @media (min-width: 768px) {
-      .mobile-action-bar { display:none !important; }
     }
 
   </style>
@@ -1122,15 +1090,7 @@
 
 
 
-  <!-- Thanh thao tác cố định dành riêng cho điện thoại -->
-  <div class="mobile-action-bar">
-    <button id="mobileArBtn" class="mobile-ar" type="button">
-      <span>⌾</span> Trải nghiệm AR
-    </button>
-    <button id="mobileChatBtn" class="mobile-chat" type="button">
-      <span>💬</span> Hỏi về Hát Xoan
-    </button>
-  </div>
+
 
   <!-- Toast -->
   <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[100] hidden">
@@ -1208,7 +1168,9 @@
     // =========================================================
     // CHATBOT FLOATING — kết nối API /api/chat/stream (Gemini + RAG, SSE)
     // =========================================================
-    const CHAT_STREAM_API = 'http://localhost:8000/api/chat/stream';
+    // Tự động nhận diện IP/hostname (hỗ trợ cả localhost và mở trên điện thoại qua LAN IP)
+    const BACKEND_HOST = window.location.hostname || 'localhost';
+    const CHAT_STREAM_API = `http://${BACKEND_HOST}:8000/api/chat/stream`;
     let xoanConvId = null;
     let xoanChatOpen = false;
 
@@ -1216,7 +1178,7 @@
     const _chatWrap = document.createElement('div');
     _chatWrap.innerHTML = `
       <button id="xoan-fab" aria-label="Mở chatbot Hát Xoan"
-        style="position:fixed;bottom:24px;right:24px;z-index:9999;
+        style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom, 0px));right:20px;z-index:9999;
                width:60px;height:60px;border-radius:50%;
                background:linear-gradient(135deg,#8B2F26,#A83A31);
                border:2.5px solid rgba(216,184,115,.7);
@@ -1228,7 +1190,7 @@
       </button>
 
       <div id="xoan-chat-panel"
-        style="display:none;position:fixed;bottom:96px;right:24px;z-index:9998;
+        style="display:none;position:fixed;bottom:calc(90px + env(safe-area-inset-bottom, 0px));right:16px;z-index:9998;
                width:min(380px,calc(100vw - 32px));
                border-radius:24px;overflow:hidden;
                border:1px solid rgba(216,184,115,.45);

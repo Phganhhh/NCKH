@@ -34,10 +34,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — cho phép frontend (Next.js port 3000, static server port 8080)
+# CORS — cho phép frontend (Next.js port 3000, static server port 8080, và điện thoại qua LAN IP)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
+    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
