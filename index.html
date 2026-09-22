@@ -1168,9 +1168,11 @@
     // =========================================================
     // CHATBOT FLOATING — kết nối API /api/chat/stream (Gemini + RAG, SSE)
     // =========================================================
-    // Tự động nhận diện IP/hostname (hỗ trợ cả localhost và mở trên điện thoại qua LAN IP)
-    const BACKEND_HOST = window.location.hostname || 'localhost';
-    const CHAT_STREAM_API = `http://${BACKEND_HOST}:8000/api/chat/stream`;
+    // Tự động nhận diện môi trường: localhost dùng backend nội bộ, online (GitHub Pages/LAN/4G) dùng Render Cloud API
+    const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    const CHAT_STREAM_API = isLocal
+      ? `http://${window.location.hostname}:8000/api/chat/stream`
+      : 'https://hat-xoan-api.onrender.com/api/chat/stream';
     let xoanConvId = null;
     let xoanChatOpen = false;
 
