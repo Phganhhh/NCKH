@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hát Xoan Phú Thọ – Di sản văn hóa phi vật thể đại diện của nhân loại. Khám phá lịch sử, các chặng hát, làn điệu, nghệ nhân và trải nghiệm AR." />
+  <title>Hát Xoan Phú Thọ | Di sản trong tầm tay</title>
+
+  <!-- Tailwind CSS CDN: không cần cài Node/NPM cho bản prototype -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font dễ đọc, hỗ trợ tiếng Việt. Có fallback về font hệ thống nếu mất mạng. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Noto+Serif:wght@400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            xoan: {
+              ink: "#291813",
+              wood: "#4A2B20",
+              clay: "#8B2F26",
+              red: "#9B332C",
+              gold: "#D8B873",
+              cream: "#F6EFDF",
+              moss: "#4B5A43",
+              olive: "#6A704E",
+            }
+          },
+          fontFamily: {
+            sansvn: ["Be Vietnam Pro", "Arial", "sans-serif"],
+            serifvn: ["Noto Serif", "Georgia", "serif"],
+            scriptvn: ["Parisienne", "cursive"],
+          },
+          boxShadow: {
+            cultural: "0 18px 55px rgba(55, 30, 20, .15)",
+            gold: "0 12px 30px rgba(216, 184, 115, .18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root{
+      --ink:#291813;
+      --wood:#4A2B20;
+      --clay:#8B2F26;
+      --red:#9B332C;
+      --gold:#D8B873;
+      --cream:#F6EFDF;
+      --moss:#4B5A43;
+      --paper:#FBF7ED;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(216,184,115,.12), transparent 22%),
+        radial-gradient(circle at 90% 70%, rgba(75,90,67,.08), transparent 20%),
+        var(--paper);
+      font-family: "Be Vietnam Pro", Arial, sans-serif;
+    }
+
+    /* Hoa văn góc lấy cảm hứng từ đường nét trang trí đình làng */
+    .ornament-corner {
+      position:absolute;
+      width:80px;
+      height:80px;
+      opacity:.8;
+      pointer-events:none;
+      background:
+        linear-gradient(90deg, rgba(216,184,115,.7) 1px, transparent 1px) 0 0/14px 14px,
+        linear-gradient(rgba(216,184,115,.7) 1px, transparent 1px) 0 0/14px 14px;
+      mask:
+        linear-gradient(135deg, black 0 65%, transparent 66%);
+      -webkit-mask:
+        linear-gradient(135deg, black 0 65%, transparent 66%);
+    }
+
+    .ornament-tl { top:0; left:0; }
+    .ornament-tr { top:0; right:0; transform:scaleX(-1); }
+    .ornament-bl { bottom:0; left:0; transform:scaleY(-1); }
+    .ornament-br { bottom:0; right:0; transform:scale(-1); }
+
+    .hero-overlay {
+      background:
+        linear-gradient(90deg, rgba(24, 10, 7, .92) 0%, rgba(38,18,12,.72) 45%, rgba(24,10,7,.18) 100%),
+        linear-gradient(0deg, rgba(24, 10, 7,.55), transparent 35%);
+    }
+    .hero-img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .texture {
+      background-image:
+        radial-gradient(rgba(74,43,32,.055) 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+
+    .gold-line::before,
+    .gold-line::after{
+      content:"";
+      display:inline-block;
+      width:58px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--gold));
+      vertical-align:middle;
+      margin:0 14px;
+    }
+    .gold-line::after{
+      background:linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .card-image {
+      transition: transform .65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .cultural-card:hover .card-image {
+      transform:scale(1.06);
+    }
+
+    .cultural-card {
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+
+    .cultural-card:hover {
+      transform:translateY(-7px);
+      box-shadow:0 22px 55px rgba(50,28,18,.16);
+    }
+
+    .play-ring {
+      box-shadow: 0 0 0 0 rgba(216,184,115,.55);
+      animation: pulseGold 2.1s infinite;
+    }
+    @keyframes pulseGold {
+      0% { box-shadow:0 0 0 0 rgba(216,184,115,.45); }
+      70% { box-shadow:0 0 0 12px rgba(216,184,115,0); }
+      100% { box-shadow:0 0 0 0 rgba(216,184,115,0); }
+    }
+
+    .float-in { animation: floatIn .7s ease both; }
+    @keyframes floatIn {
+      from { opacity:0; transform:translateY(18px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .chatbot-shadow {
+      box-shadow: 0 25px 65px rgba(54,30,22,.25);
+    }
+
+    .modal-hidden {
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(12px);
+    }
+
+    .modal-visible {
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    .nav-shadow {
+      box-shadow: 0 8px 35px rgba(37, 19, 13, .11);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-anchor { scroll-margin-top: 94px; }
+
+    @media (max-width: 767px) {
+      .gold-line::before,
+      .gold-line::after {
+        width:24px;
+        margin:0 8px;
+      }
+    }
+  
+
+    /* =========================================================
+       MOBILE-FIRST OVERRIDES
+       Mục tiêu: màn hình điện thoại 360–430px, thao tác bằng ngón tay.
+       ========================================================= */
+    @media (max-width: 767px) {
+      body { overflow-x:hidden; padding-bottom:68px; }
+      .section-anchor { scroll-margin-top:82px; }
+
+      .hero-overlay {
+        background:
+          linear-gradient(180deg, rgba(24,10,7,.78) 0%, rgba(24,10,7,.57) 48%, rgba(24,10,7,.88) 100%);
+      }
+
+      /* Hero gọn hơn trên điện thoại và ưu tiên nội dung + nút AR */
+      main > section:first-child {
+        min-height: 735px !important;
+      }
+
+      main > section:first-child > div.max-w-7xl {
+        padding-top: 118px !important;
+        padding-bottom: 180px !important;
+      }
+
+      main > section:first-child h1 {
+        font-size: 4.85rem !important;
+        line-height:.82 !important;
+        margin-top:1.05rem !important;
+      }
+
+      main > section:first-child p {
+        font-size: .94rem !important;
+        line-height:1.65 !important;
+      }
+
+      main > section:first-child .mt-8.flex {
+        margin-top:1.25rem !important;
+      }
+
+      /* Các nút đủ lớn để chạm bằng ngón tay */
+      a, button { -webkit-tap-highlight-color: transparent; }
+      main button, main a { min-height:44px; }
+
+      /* Chatbot chuyển thành bottom-sheet nhẹ */
+      #chatbot {
+        position:fixed !important;
+        z-index:70 !important;
+        left:12px !important;
+        right:12px !important;
+        bottom:78px !important;
+        width:auto !important;
+        max-height:calc(100dvh - 145px);
+      }
+      #chatbot > div { max-height:inherit; overflow:auto; }
+      #chatbot .p-5 { padding:1rem !important; }
+      #chatbot .chatbot-shadow { border-radius:22px !important; }
+
+      /* Cards thành 1 cột để cuộn dọc tự nhiên */
+      #di-san .grid,
+      #ba-chang .grid,
+      #thu-vien .grid,
+      #nghe-nhan .grid { grid-template-columns:1fr !important; }
+
+      #di-san .cultural-card { min-height:250px; }
+      #di-san .cultural-card > .relative { min-height:250px; }
+
+      /* Hình ảnh không quá cao trên mobile */
+      #lich-su img { height:360px !important; }
+      #ba-chang article .relative.h-60 { height:205px !important; }
+      #thu-vien article .relative.h-60 { height:210px !important; }
+
+      /* Trình nghe mẫu: mỗi track là một hàng dễ thao tác */
+      #lan-dieu .grid { grid-template-columns:1fr !important; }
+      #lan-dieu .audio-btn { width:52px !important; height:52px !important; }
+
+      /* Footer gọn hơn */
+      footer .grid { grid-template-columns:1fr !important; }
+      footer { padding-bottom:18px; }
+
+      /* Thanh thao tác cố định: AR + Chatbot */
+      .mobile-action-bar {
+        display:flex !important;
+        position:fixed;
+        left:0; right:0; bottom:0;
+        z-index:90;
+        gap:8px;
+        padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+        background:rgba(32,18,14,.96);
+        border-top:1px solid rgba(216,184,115,.22);
+        backdrop-filter:blur(14px);
+      }
+      .mobile-action-bar a,
+      .mobile-action-bar button {
+        flex:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:7px;
+        border-radius:14px;
+        padding:11px 8px;
+        font-size:12px;
+        font-weight:700;
+        color:white;
+      }
+      .mobile-action-bar .mobile-ar { background:#9B332C; }
+      .mobile-action-bar .mobile-chat { background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14); }
+
+      /* Modal chiếm gần hết chiều cao nhưng vẫn có khoảng thở */
+      #searchModal > div.relative { margin-top:5rem !important; }
+      #arModal .relative.min-h-full { align-items:flex-end !important; }
+      #arModal .relative.min-h-full > div { max-height:92dvh; overflow:auto; border-radius:26px 26px 0 0; }
+    }
+
+    @media (min-width: 768px) {
+      .mobile-action-bar { display:none !important; }
+    }
+
+  </style>
+</head>
+
+<body class="font-sansvn antialiased">
+
+  <!-- =========================================================
+       HEADER / NAVBAR
+       ========================================================= -->
+  <header id="top" class="fixed top-0 left-0 right-0 z-50">
+    <nav id="navbar" class="bg-[#20120e]/80 text-white border-b border-white/10 nav-shadow transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[76px] flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-full border border-xoan-gold/50 flex items-center justify-center bg-white/5 group-hover:bg-white/10 transition">
+            <svg viewBox="0 0 64 64" class="w-8 h-8 text-xoan-gold" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M32 53C26 45 18 40 18 31c0-7 5-12 12-16 7 4 12 9 12 16 0 9-8 14-10 22Z"/>
+              <path d="M32 19C28 12 23 10 18 9c-1 6 1 11 8 16"/>
+              <path d="M32 19c4-7 9-9 14-10 1 6-1 11-8 16"/>
+              <path d="M14 24c5 1 10 4 14 9M50 24c-5 1-10 4-14 9"/>
+            </svg>
+          </div>
+          <div class="leading-tight">
+            <div class="font-serifvn text-[21px] tracking-[.08em]">HÁT XOAN</div>
+            <div class="text-[10px] sm:text-[11px] text-white/65 tracking-[.18em] uppercase">Di sản trong tầm tay</div>
+          </div>
+        </a>
+
+        <!-- Desktop menu -->
+        <div class="hidden lg:flex items-center gap-7 text-sm">
+          <a href="#di-san" class="text-white/80 hover:text-xoan-gold transition">Di sản</a>
+          <a href="#lich-su" class="text-white/80 hover:text-xoan-gold transition">Lịch sử</a>
+          <a href="#ba-chang" class="text-white/80 hover:text-xoan-gold transition">Ba chặng hát</a>
+          <a href="#lan-dieu" class="text-white/80 hover:text-xoan-gold transition">Làn điệu</a>
+          <a href="#thu-vien" class="text-white/80 hover:text-xoan-gold transition">Thư viện</a>
+          <a href="#nghe-nhan" class="text-white/80 hover:text-xoan-gold transition">Nghệ nhân</a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Search -->
+          <button id="searchBtn" aria-label="Mở tìm kiếm" class="w-11 h-11 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 hover:border-xoan-gold/50 transition flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+          </button>
+
+          <!-- Mobile menu -->
+          <button id="menuBtn" aria-label="Mở menu" class="lg:hidden w-11 h-11 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition flex items-center justify-center">
+            <svg id="menuIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu panel -->
+      <div id="mobileMenu" class="lg:hidden hidden border-t border-white/10 bg-[#20120e]/95">
+        <div class="max-w-7xl mx-auto px-4 py-4 grid gap-1 text-sm">
+          <a href="#di-san" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Di sản</a>
+          <a href="#lich-su" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Lịch sử & Nguồn gốc</a>
+          <a href="#ba-chang" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Ba chặng hát Xoan</a>
+          <a href="#lan-dieu" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Làn điệu tiêu biểu</a>
+          <a href="#thu-vien" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Thư viện</a>
+          <a href="#nghe-nhan" class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5">Nghệ nhân</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <main id="home">
+
+    <section class="relative min-h-[760px] md:min-h-[820px] overflow-hidden bg-xoan-ink">
+      <!-- Ảnh Hát Xoan thực tế từ Wikimedia Commons. Có thể thay bằng ảnh của dự án. -->
+      <img
+        src="images/nen.png"
+        alt="Các nghệ nhân biểu diễn Hát Xoan tại Việt Trì"
+        class="absolute inset-0 w-full h-full object-cover object-center hero-img"
+        loading="eager"
+      />
+      <div class="absolute inset-0 hero-overlay"></div>
+
+      <!-- Ornament -->
+      <div class="ornament-corner ornament-tl"></div>
+      <div class="ornament-corner ornament-tr"></div>
+      <div class="ornament-corner ornament-bl"></div>
+      <div class="ornament-corner ornament-br"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[155px] pb-[125px]">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-xoan-gold/40 bg-black/20 px-4 py-2 text-xs tracking-[.13em] text-xoan-gold uppercase float-in">
+            <span class="w-2 h-2 bg-xoan-gold rounded-full"></span>
+            Di sản văn hóa phi vật thể đại diện của nhân loại
+          </div>
+
+          <h1 class="mt-6 font-scriptvn text-7xl sm:text-8xl lg:text-[9.5rem] leading-[.78] text-[#F8EAC8] drop-shadow-[0_10px_30px_rgba(0,0,0,.35)] float-in">
+            Hát Xoan
+          </h1>
+
+          <p class="mt-7 max-w-xl text-xl sm:text-2xl font-serifvn text-white/95 leading-relaxed float-in">
+            Câu hát cửa đình từ miền Đất Tổ, nơi tiếng hát, điệu múa, tiếng trống và phách cùng kể câu chuyện về cội nguồn và đời sống cộng đồng.
+          </p>
+
+          <div class="my-6 flex items-center text-xoan-gold/90 text-sm">
+            <span class="h-px flex-1 max-w-[90px] bg-xoan-gold/70"></span>
+            <span class="mx-3">✦</span>
+            <span class="h-px flex-1 max-w-[90px] bg-xoan-gold/70"></span>
+          </div>
+
+          <p class="max-w-2xl text-white/75 text-sm sm:text-base leading-7">
+            Hát Xoan gắn với không gian đình, miếu và tục thờ Hùng Vương ở Phú Thọ; nghệ thuật trình diễn kết hợp hát, múa, trống và phách.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <button id="startARHero" type="button" class="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-xoan-red to-[#7d241f] border border-xoan-gold/65 text-white px-6 py-4 font-semibold shadow-gold hover:translate-y-[-2px] hover:brightness-110 transition">
+              <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>
+                  <path d="M12 16V8m-4 4h8"/>
+                </svg>
+              </span>
+              Bắt đầu trải nghiệm AR
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <a href="#di-san" class="inline-flex items-center justify-center gap-3 rounded-full bg-white/5 backdrop-blur-md border border-white/25 text-white px-6 py-4 font-medium hover:bg-white/10 transition">
+              <span class="text-xl">◫</span>
+              Khám phá Hát Xoan
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <!-- Mini metadata -->
+          <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/65">
+            <span><b class="text-white">2011</b> ghi danh cần bảo vệ khẩn cấp</span>
+            <span class="w-1 h-1 rounded-full bg-xoan-gold/60"></span>
+            <span><b class="text-white">2017</b> vào Danh sách đại diện</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chatbot nổi giống tinh thần mockup -->
+      <aside id="chatbot" class="absolute z-20 right-4 sm:right-8 xl:right-14 bottom-10 w-[min(360px,calc(100%-32px))]">
+        <div class="chatbot-shadow rounded-[28px] border border-xoan-gold/60 bg-[#FFF9ED]/95 backdrop-blur-xl overflow-hidden">
+          <div class="relative bg-gradient-to-r from-[#8B2F26] to-[#A83A31] px-5 py-4 text-white">
+            <button id="closeChat" aria-label="Thu nhỏ chatbot" class="absolute right-3 top-3 w-7 h-7 rounded-full bg-white/10 hover:bg-white/20">×</button>
+            <div class="flex items-center gap-3 pr-7">
+              <div class="w-11 h-11 rounded-full bg-[#F4D39B] border-2 border-white/60 flex items-center justify-center text-2xl">🧒🏻</div>
+              <div>
+                <div class="font-semibold">Hỏi đáp về Hát Xoan</div>
+                <div class="text-xs text-white/70">Trợ lý nội dung di sản</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <p class="text-sm leading-6 text-xoan-ink/80">
+              Tôi có thể giúp bạn tìm hiểu về nguồn gốc, ba chặng hát, không gian diễn xướng và các nghệ nhân Xoan.
+            </p>
+
+            <div class="mt-4 flex gap-2 flex-wrap">
+              <button class="quick-q rounded-full border border-xoan-wood/15 bg-white px-3 py-1.5 text-xs hover:border-xoan-gold hover:bg-xoan-cream transition">Hát Xoan là gì?</button>
+              <button class="quick-q rounded-full border border-xoan-wood/15 bg-white px-3 py-1.5 text-xs hover:border-xoan-gold hover:bg-xoan-cream transition">Có mấy chặng?</button>
+            </div>
+
+            <div class="mt-4 flex items-center gap-2 rounded-2xl border border-xoan-wood/15 bg-white p-2">
+              <input id="chatInput" type="text" placeholder="Nhập câu hỏi của bạn..." class="min-w-0 flex-1 outline-none bg-transparent px-2 text-sm text-xoan-ink" />
+              <button id="sendChat" aria-label="Gửi câu hỏi" class="w-10 h-10 rounded-xl bg-xoan-wood text-white hover:bg-xoan-red transition">
+                →
+              </button>
+            </div>
+
+            <p id="chatReply" class="hidden mt-3 rounded-xl bg-xoan-cream px-3 py-2 text-xs leading-5 text-xoan-wood"></p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- =========================================================
+         INTRO / DI SẢN
+         ========================================================= -->
+    <section id="di-san" class="section-anchor relative overflow-hidden py-20 sm:py-24 bg-[#F7F0E1] texture">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">Khám phá di sản</p>
+          <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl text-xoan-ink sm:whitespace-nowrap">
+            Hát Xoan trong không gian Đất Tổ
+          </h2>
+          <div class="mt-4 text-xoan-wood/50 gold-line">✦</div>
+          <p class="mt-5 text-xoan-wood/75 leading-7">
+            Hát Xoan là nghệ thuật trình diễn dân gian của Phú Thọ, gắn với tục thờ Hùng Vương và sinh hoạt cộng đồng. Giá trị của di sản nằm ở sự kết hợp giữa âm nhạc, lời ca, múa, nhịp trống – phách và không gian thực hành truyền thống.
+          </p>
+        </div>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-5">
+          <!-- Card 1 -->
+          <article class="cultural-card group relative overflow-hidden rounded-[26px] bg-xoan-wood text-white min-h-[300px]">
+            <img class="card-image absolute inset-0 w-full h-full object-cover"
+                 src="images/khong_gian_hat_xoan.jpg"
+                 alt="Không gian biểu diễn Hát Xoan"  loading="lazy" decoding="async" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#20100c] via-[#20100c]/55 to-transparent"></div>
+            <div class="relative h-full min-h-[300px] p-6 flex flex-col justify-end">
+              <div class="w-12 h-12 rounded-2xl border border-white/25 bg-white/10 backdrop-blur flex items-center justify-center text-2xl">⌂</div>
+              <h3 class="mt-4 text-xl font-serifvn">Lịch sử & Nguồn gốc</h3>
+              <p class="mt-2 text-sm text-white/70 leading-6">Từ truyền thuyết thời Hùng Vương đến không gian đình làng và sinh hoạt cộng đồng ở vùng Đất Tổ.</p>
+              <a href="#lich-su" class="mt-4 text-xoan-gold text-sm font-semibold group-hover:translate-x-1 transition">Tìm hiểu →</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="cultural-card group relative overflow-hidden rounded-[26px] bg-xoan-wood text-white min-h-[300px]">
+            <img class="card-image absolute inset-0 w-full h-full object-cover"
+                 src="https://media.baovanhoa.vn/zoom/1000/uploaded/phamhuyan/2026_03_28/25_cbqv.jpg"
+                 alt="Biểu diễn Hát Xoan tại Phú Thọ"
+                 onerror="this.style.display='none';"  loading="lazy" decoding="async" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#20100c] via-[#20100c]/60 to-[#20100c]/10"></div>
+            <div class="relative h-full min-h-[300px] p-6 flex flex-col justify-end">
+              <div class="w-12 h-12 rounded-2xl border border-white/25 bg-white/10 backdrop-blur flex items-center justify-center text-2xl">♫</div>
+              <h3 class="mt-4 text-xl font-serifvn">Các làn điệu tiêu biểu</h3>
+              <p class="mt-2 text-sm text-white/70 leading-6">Những bài hát vừa mang sắc thái nghi lễ vừa phản ánh chúc phúc, đời sống và tình cảm cộng đồng.</p>
+              <a href="#lan-dieu" class="mt-4 text-xoan-gold text-sm font-semibold group-hover:translate-x-1 transition">Nghe & đọc →</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="cultural-card group relative overflow-hidden rounded-[26px] bg-xoan-wood text-white min-h-[300px]">
+            <img class="card-image absolute inset-0 w-full h-full object-cover"
+                 src="https://phunuvietnam.mediacdn.vn/179072216278405120/2021/10/16/nguyen-thi-lich-1-16343526258771635234154.png"
+                 alt="Nghệ nhân truyền dạy Hát Xoan"  loading="lazy" decoding="async" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#20100c] via-[#20100c]/60 to-transparent"></div>
+            <div class="relative h-full min-h-[300px] p-6 flex flex-col justify-end">
+              <div class="w-12 h-12 rounded-2xl border border-white/25 bg-white/10 backdrop-blur flex items-center justify-center text-2xl">♧</div>
+              <h3 class="mt-4 text-xl font-serifvn">Nghệ nhân & truyền dạy</h3>
+              <p class="mt-2 text-sm text-white/70 leading-6">Ông trùm, bà trùm và nghệ nhân giữ vai trò truyền khẩu, hướng dẫn bài bản và duy trì sinh hoạt phường Xoan.</p>
+              <a href="#nghe-nhan" class="mt-4 text-xoan-gold text-sm font-semibold group-hover:translate-x-1 transition">Gặp người giữ lửa →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         LỊCH SỬ
+         ========================================================= -->
+    <section id="lich-su" class="section-anchor py-20 sm:py-28 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-16 items-center">
+          <div class="relative">
+            <div class="absolute -left-4 -top-4 w-24 h-24 rounded-[28px] border border-xoan-gold/50"></div>
+            <img src="images/1.lichsu.jpg"
+                 alt="Các nghệ nhân Hát Xoan biểu diễn"
+                 class="relative w-full h-[450px] sm:h-[560px] object-cover rounded-[32px] shadow-cultural"
+                 style="object-position: 90% center;" loading="lazy" decoding="async" />
+            <div class="absolute -bottom-5 -right-4 sm:right-5 rounded-2xl bg-xoan-ink text-white px-5 py-4 shadow-xl">
+              <div class="text-xs text-xoan-gold uppercase tracking-[.18em]">Không gian</div>
+              <div class="mt-1 font-serifvn text-lg">Đình – miếu – làng Xoan</div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">01 · Lịch sử</p>
+            <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl text-xoan-ink">Từ truyền thuyết đến di sản được UNESCO ghi danh</h2>
+            <p class="mt-6 leading-7 text-xoan-wood/75">
+              Theo tư liệu văn hóa, Hát Xoan được lưu truyền ở vùng Phú Thọ và gắn với truyền thuyết thời các Vua Hùng. Trong thực hành truyền thống, Xoan hiện diện trong mùa xuân, tại đình, miếu và những không gian cộng đồng.
+            </p>
+
+            <div class="mt-8 space-y-5">
+              <div class="flex gap-4">
+                <div class="shrink-0 w-10 h-10 rounded-full bg-xoan-red text-white flex items-center justify-center font-bold text-sm">01</div>
+                <div>
+                  <h3 class="font-semibold">Không gian cửa đình</h3>
+                  <p class="mt-1 text-sm text-xoan-wood/65 leading-6">Di sản được thực hành trong quan hệ với cộng đồng làng và tín ngưỡng, đặc biệt là tục thờ Hùng Vương.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="shrink-0 w-10 h-10 rounded-full bg-xoan-moss text-white flex items-center justify-center font-bold text-sm">02</div>
+                <div>
+                  <h3 class="font-semibold">Di sản sống</h3>
+                  <p class="mt-1 text-sm text-xoan-wood/65 leading-6">Nghệ nhân truyền dạy bằng thực hành trực tiếp, kết hợp truyền khẩu với tư liệu ghi âm, ghi hình và văn bản.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <div class="shrink-0 w-10 h-10 rounded-full bg-xoan-gold text-xoan-ink flex items-center justify-center font-bold text-sm">03</div>
+                <div>
+                  <h3 class="font-semibold">Các mốc UNESCO</h3>
+                  <p class="mt-1 text-sm text-xoan-wood/65 leading-6">Hát Xoan được ghi danh vào Danh sách cần bảo vệ khẩn cấp năm 2011; năm 2017 được chuyển sang Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <a href="https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 rounded-full border border-xoan-wood/20 px-5 py-3 text-sm font-semibold text-xoan-wood hover:bg-xoan-cream hover:border-xoan-gold transition">
+                Xem hồ sơ UNESCO →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         BA CHẶNG HÁT XOAN
+         ========================================================= -->
+    <section id="ba-chang" class="section-anchor py-20 sm:py-28 bg-[#EDE3D1] texture">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">02 · Cấu trúc trình diễn</p>
+          <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl text-xoan-ink">Ba chặng hát Xoan</h2>
+          <p class="mt-5 text-xoan-wood/70 leading-7">
+            Các nguồn tư liệu của Bộ Văn hóa, Thể thao và Du lịch và cổng thông tin du lịch Phú Thọ mô tả Hát Xoan theo ba chặng chính: hát nghi lễ (hát thờ), hát quả cách và hát hội/giao duyên.
+          </p>
+        </div>
+
+        <div class="mt-12 grid lg:grid-cols-3 gap-5">
+          <article class="cultural-card bg-white rounded-[28px] border border-xoan-wood/10 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
+              <img src="images/4_khong_gian_dien_xuong.jpg"
+                   alt="Biểu diễn Hát Xoan trong không gian đình"
+                   class="card-image w-full h-full object-cover"  loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <div class="absolute left-5 bottom-5 w-12 h-12 rounded-2xl bg-white/90 text-xoan-red flex items-center justify-center text-xl font-bold">Ⅰ</div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs uppercase tracking-[.18em] text-xoan-red font-semibold">Chặng một</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Hát nghi lễ</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                Còn được gọi là hát thờ, hát chào vua hoặc hát mời vua. Đây là phần mang màu sắc nghi lễ, mở đầu việc diễn xướng trong không gian thờ tự.
+              </p>
+              <div class="mt-5 p-4 rounded-2xl bg-xoan-cream text-sm leading-6">
+                <b>Điểm nhấn:</b> lời ca trang trọng, hát – múa kết hợp với trống và phách, gắn với tín ngưỡng và cội nguồn.
+              </div>
+            </div>
+          </article>
+
+          <article class="cultural-card bg-white rounded-[28px] border border-xoan-wood/10 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
+              <img src="https://cly.1cdn.vn/2020/04/04/congly-vn_nghin-nam-khuc-hat-mon-dinh-hinh-anh0721812085.jpg"
+                   alt="Nghệ nhân Hát Xoan biểu diễn tại Phú Thọ"
+                   class="card-image w-full h-full object-cover"  loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <div class="absolute left-5 bottom-5 w-12 h-12 rounded-2xl bg-white/90 text-xoan-red flex items-center justify-center text-xl font-bold">Ⅱ</div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs uppercase tracking-[.18em] text-xoan-red font-semibold">Chặng hai</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Hát quả cách</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                “Quả cách” là tên gọi truyền thống cho những bài bản dài. Nội dung thường hướng đến lời chúc phúc, kể về mùa vụ, thời tiết, nghề nghiệp và đời sống cư dân.
+              </p>
+              <div class="mt-5 p-4 rounded-2xl bg-xoan-cream text-sm leading-6">
+                <b>Điểm nhấn:</b> cấu trúc bài bản phong phú, giàu tính tự sự và chúc tụng.
+              </div>
+            </div>
+          </article>
+
+          <article class="cultural-card bg-white rounded-[28px] border border-xoan-wood/10 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
+              <img src="https://imgovietnam.vietnamnews.vn/MediaUpload/Article/2026/4/23/498442-Commentary-3.JPG"
+                   alt="Nghệ nhân biểu diễn Hát Xoan tại không gian đình"
+                   class="card-image w-full h-full object-cover"  loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <div class="absolute left-5 bottom-5 w-12 h-12 rounded-2xl bg-white/90 text-xoan-red flex items-center justify-center text-xl font-bold">Ⅲ</div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs uppercase tracking-[.18em] text-xoan-red font-semibold">Chặng ba</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Hát hội · giao duyên</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                Phần hát hội tạo không khí giao lưu cộng đồng. Nhiều tiết mục thể hiện sự đối đáp, giao duyên giữa đào Xoan và trai làng, với sắc thái vui tươi và giàu tính tương tác.
+              </p>
+              <div class="mt-5 p-4 rounded-2xl bg-xoan-cream text-sm leading-6">
+                <b>Điểm nhấn:</b> không khí hội hè, đối đáp nam nữ và sự tham gia của cộng đồng.
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         LÀN ĐIỆU + AUDIO PLAYER
+         ========================================================= -->
+    <section id="lan-dieu" class="section-anchor py-20 sm:py-28 bg-xoan-ink text-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[.85fr_1.15fr] gap-10 items-end">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-gold">03 · Thanh âm di sản</p>
+            <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl">Lắng nghe những câu Xoan</h2>
+            <p class="mt-5 text-white/65 leading-7">
+              "Không gian âm thanh truyền thống của Hát Xoan được lưu giữ qua từng nhịp phách, câu ca. Mời bạn lắng nghe những làn điệu tiêu biểu qua các chặng hát dưới đây."
+            </p>
+          </div>
+          <div class="lg:text-right">
+            <span class="inline-flex items-center gap-2 rounded-full border border-xoan-gold/30 bg-white/5 px-4 py-2 text-xs text-xoan-gold">
+              <span class="w-2 h-2 rounded-full bg-xoan-gold animate-pulse"></span>
+              Audio player prototype
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-12 grid lg:grid-cols-3 gap-5">
+          <!-- Audio item 1 -->
+          <article class="rounded-[28px] border border-white/10 bg-white/[.045] p-6 hover:bg-white/[.07] transition">
+            <div class="flex items-center gap-4">
+              <button class="audio-btn play-ring shrink-0 w-14 h-14 rounded-full bg-xoan-gold text-xoan-ink flex items-center justify-center"
+                      data-track="Giáo trống-Giáo pháo" data-audio="audio/giao_trong.mp3">
+                <svg class="play-svg w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div>
+                <h3 class="font-serifvn text-xl">Giáo trống-Giáo pháo</h3>
+                <p class="text-xs text-white/50 mt-1">Chặng hát nghi lễ</p>
+              </div>
+            </div>
+            <div class="mt-6 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div class="audio-progress h-full bg-xoan-gold rounded-full w-0 transition-[width] duration-200"></div>
+            </div>
+            <div class="mt-3 flex justify-between text-[11px] text-white/45">
+              <span class="audio-time">0:00</span>
+              <span>Hát Xoan</span>
+            </div>
+          </article>
+
+          <!-- Audio item 2 -->
+          <article class="rounded-[28px] border border-white/10 bg-white/[.045] p-6 hover:bg-white/[.07] transition">
+            <div class="flex items-center gap-4">
+              <button class="audio-btn play-ring shrink-0 w-14 h-14 rounded-full bg-xoan-gold text-xoan-ink flex items-center justify-center"
+                      data-track="Tứ mùa cách" data-audio="audio/tu_mua_cach.mp3">
+                <svg class="play-svg w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div>
+                <h3 class="font-serifvn text-xl">Tứ mùa cách</h3>
+                <p class="text-xs text-white/50 mt-1">Chặng hát quả cách</p>
+              </div>
+            </div>
+            <div class="mt-6 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div class="audio-progress h-full bg-xoan-gold rounded-full w-0 transition-[width] duration-200"></div>
+            </div>
+            <div class="mt-3 flex justify-between text-[11px] text-white/45">
+              <span class="audio-time">0:00</span>
+              <span>Hát Xoan</span>
+            </div>
+          </article>
+
+          <!-- Audio item 3 -->
+          <article class="rounded-[28px] border border-white/10 bg-white/[.045] p-6 hover:bg-white/[.07] transition">
+            <div class="flex items-center gap-4">
+              <button class="audio-btn play-ring shrink-0 w-14 h-14 rounded-full bg-xoan-gold text-xoan-ink flex items-center justify-center"
+                      data-track="Mó cá" data-audio="audio/mo_ca.mp3">
+                <svg class="play-svg w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div>
+                <h3 class="font-serifvn text-xl">Mó cá</h3>
+                <p class="text-xs text-white/50 mt-1">Chặng hát hội</p>
+              </div>
+            </div>
+            <div class="mt-6 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div class="audio-progress h-full bg-xoan-gold rounded-full w-0 transition-[width] duration-200"></div>
+            </div>
+            <div class="mt-3 flex justify-between text-[11px] text-white/45">
+              <span class="audio-time">0:00</span>
+              <span>Hát Xoan</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         04 · TƯ LIỆU SỐ
+         Chỉ giữ 3 nhóm: không gian diễn xướng · truyền dạy · trống và phách.
+         ========================================================= -->
+    <section id="thu-vien" class="section-anchor py-20 sm:py-28 bg-[#F7F0E1]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">04 · Tư liệu số</p>
+          <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl text-xoan-ink">Tư liệu về một di sản sống</h2>
+          <p class="mt-4 text-xoan-wood/70 leading-7">
+           "Hát Xoan không nằm trên những trang giấy cũ, mà đang thở và chảy mãi trong đời sống cộng đồng. Mời bạn khám phá kho tư liệu sống về những nghệ nhân, không gian diễn xướng và hành trình trao truyền di sản qua các thế hệ."
+          </p>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-3 gap-5">
+          <!-- 01 · Không gian diễn xướng -->
+          <article class="cultural-card group bg-white rounded-[28px] overflow-hidden border border-xoan-wood/10">
+            <div class="relative h-64 overflow-hidden">
+              <img src="https://media.baovanhoa.vn/uploaded/phamhuyan/2026_03_28/18_fich.jpg"
+                   alt="Nghệ nhân Hát Xoan trong không gian đình Hùng Lô"
+                   class="card-image w-full h-full object-cover" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/55 text-white px-3 py-1 text-xs backdrop-blur">Không gian</span>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-semibold uppercase tracking-[.15em] text-xoan-red">Đình · miếu · làng</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Không gian diễn xướng</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                Hát Xoan còn được gọi là <b>hát cửa đình</b>. Các phường Xoan thực hành trong những không gian gắn với tín ngưỡng và cộng đồng như miếu Lãi Lèn, đình Thét, đình Kim Đái, đình An Thái và đình Hùng Lô. Vì vậy, di tích không chỉ là nơi đặt sân khấu mà là một phần của bối cảnh văn hóa của cuộc hát.
+              </p>
+              <div class="mt-4 rounded-2xl bg-xoan-cream p-4 text-xs text-xoan-wood/65 leading-5">
+                <b>Nguồn:</b> Cổng thông tin Du lịch Phú Thọ; Bộ VHTTDL 2024; VietnamPlus 2026.
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 · Truyền dạy qua các thế hệ -->
+          <article class="cultural-card group bg-white rounded-[28px] overflow-hidden border border-xoan-wood/10">
+            <div class="relative h-64 overflow-hidden">
+              <img src="https://thethaovanhoa.mediacdn.vn/Upload/3uPkfvAxvuOpUQrmKeiDaA/files/2018/11/A/09/xoan.jpg"
+                   alt="Nghệ nhân hướng dẫn trẻ em học các động tác Hát Xoan"
+                   class="card-image w-full h-full object-cover" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/55 text-white px-3 py-1 text-xs backdrop-blur">Truyền dạy</span>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-semibold uppercase tracking-[.15em] text-xoan-red">Nghệ nhân · người học · cộng đồng</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Truyền dạy qua các thế hệ</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                Hát Xoan được học chủ yếu qua <b>thực hành và truyền khẩu</b>. Người học tiếp nhận lời hát, động tác múa, cách gõ nhịp và cách phối hợp trong nhóm từ nghệ nhân và thành viên có kinh nghiệm. Các lớp học cộng đồng, hoạt động trải nghiệm với học sinh và chương trình truyền dạy giúp tạo thêm môi trường để thế hệ trẻ tiếp tục thực hành di sản.
+              </p>
+              <div class="mt-4 rounded-2xl bg-xoan-cream p-4 text-xs text-xoan-wood/65 leading-5">
+                <b>Nguồn:</b> Viện Âm nhạc Việt Nam; Thể thao & Văn hóa 2018; VTV 2024.
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 · Trống và phách -->
+          <article class="cultural-card group bg-white rounded-[28px] overflow-hidden border border-xoan-wood/10">
+            <div class="relative h-64 overflow-hidden">
+              <img src="https://static-images.vnncdn.net/files/publish/2023/6/20/phu-tho-bao-ton-di-san-hat-xoan-gan-voi-du-lich-trai-nghiem-200.jpg"
+                   alt="Kép Xoan biểu diễn với trống trong không gian đình"
+                   class="card-image w-full h-full object-cover" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/55 text-white px-3 py-1 text-xs backdrop-blur">Nhạc cụ</span>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-semibold uppercase tracking-[.15em] text-xoan-red">Tiếng nhịp của cuộc hát</div>
+              <h3 class="mt-2 font-serifvn text-2xl">Trống và phách</h3>
+              <p class="mt-3 text-sm text-xoan-wood/70 leading-6">
+                <b>Trống và phách tre</b> là những nhạc cụ đặc trưng của Hát Xoan. Kép nam thường lĩnh xướng, múa và đệm trống; đào nữ hát phỏng, hát đối đáp và múa. Nhịp gõ giúp giữ mạch cho lời ca và động tác, tạo nên phần âm thanh mộc mạc của cuộc hát.
+              </p>
+              <div class="mt-4 rounded-2xl bg-xoan-cream p-4 text-xs text-xoan-wood/65 leading-5">
+                <b>Nguồn:</b> Ủy ban Nhà nước về người Việt Nam ở nước ngoài; Viện Âm nhạc Việt Nam.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-3 gap-4 text-sm">
+          <div class="rounded-2xl border border-xoan-wood/10 bg-white p-5">
+            <div class="text-2xl text-xoan-red">⌂</div>
+            <div class="mt-2 font-semibold">Di tích là một phần của di sản</div>
+            <p class="mt-1 text-xoan-wood/60 leading-5">Đình, miếu và làng tạo nên không gian xã hội để cuộc hát được thực hành.</p>
+          </div>
+          <div class="rounded-2xl border border-xoan-wood/10 bg-white p-5">
+            <div class="text-2xl text-xoan-moss">♧</div>
+            <div class="mt-2 font-semibold">Truyền dạy bằng thực hành</div>
+            <p class="mt-1 text-xoan-wood/60 leading-5">Học hát gắn với học múa, nhịp gõ, lề lối và phối hợp trong phường.</p>
+          </div>
+          <div class="rounded-2xl border border-xoan-wood/10 bg-white p-5">
+            <div class="text-2xl text-xoan-gold">◉</div>
+            <div class="mt-2 font-semibold">Nhịp trống – phách</div>
+            <p class="mt-1 text-xoan-wood/60 leading-5">Trống và phách góp phần tổ chức nhịp điệu của lời ca, múa và diễn xướng.</p>
+          </div>
+        </div>
+
+        <div class="mt-8 text-xs text-xoan-wood/55 leading-5">
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         NGƯỜI GIỮ LỬA / HỒ SƠ NGHỆ NHÂN & 4 PHƯỜNG XOAN GỐC
+         Nội dung dưới đây chỉ dùng các dữ kiện có nguồn rõ ràng.
+         Những chức danh gắn mốc năm được ghi chú để tránh hiểu nhầm
+         là chức danh hiện tại nếu nguồn không xác nhận hiện tại.
+         ========================================================= -->
+    <section id="nghe-nhan" class="section-anchor py-20 sm:py-28 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">05 · Con người của di sản</p>
+          <h2 class="mt-2 font-serifvn text-4xl sm:text-5xl text-xoan-ink">Người giữ lửa</h2>
+          <p class="mt-5 text-xoan-wood/70 leading-7">
+            Hát Xoan được bảo tồn không chỉ bằng tư liệu mà trước hết bằng cộng đồng thực hành. UNESCO ghi nhận bốn phường Xoan truyền thống; trong mỗi phường, <b>trùm</b> giữ vai trò quan trọng trong việc bảo tồn bài bản, tuyển chọn người học, truyền dạy lối hát và tổ chức luyện tập.
+          </p>
+        </div>
+
+        <!-- Hồ sơ nghệ nhân được nguồn chính thống ghi nhận -->
+        <div class="mt-10 grid lg:grid-cols-2 gap-6">
+          <article class="rounded-[30px] overflow-hidden border border-xoan-wood/10 bg-[#F8F1E4] cultural-card">
+            <div class="flex flex-col sm:flex-row">
+              <img
+                src=images/nghee_nhan_nu.jpg
+                alt="Nghệ nhân Nguyễn Thị Lịch trong không gian truyền dạy Hát Xoan"
+                class="w-full sm:w-44 h-60 sm:h-auto object-cover"
+                loading="lazy"
+              />
+              <div class="p-6">
+                <div class="text-xs uppercase tracking-[.18em] text-xoan-red font-semibold">Nghệ nhân Nhân dân</div>
+                <h3 class="mt-2 font-serifvn text-2xl">Nguyễn Thị Lịch</h3>
+                <p class="mt-3 text-sm text-xoan-wood/72 leading-6">
+                  Nguồn của Bộ Văn hóa, Thể thao và Du lịch ghi nhận bà Nguyễn Thị Lịch là <b>Trùm phường Xoan An Thái</b>, xã Phượng Lâu, thành phố Việt Trì; bà sinh ra trong gia đình có truyền thống Hát Xoan và có nhiều đóng góp trong việc gây dựng, thực hành và truyền dạy di sản.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">An Thái</span>
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">Truyền dạy</span>
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">Nguồn: Bộ VHTTDL</span>
+                </div>
+                <a target="_blank" rel="noopener noreferrer" href="https://bvhttdl.gov.vn/phu-tho-bao-ton-va-phat-huy-gia-tri-di-san-van-hoa-vung-dat-to-20210913075256148.htm" class="inline-flex mt-5 text-sm font-semibold text-xoan-red hover:underline">
+                  Xem nguồn xác minh →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-[30px] overflow-hidden border border-xoan-wood/10 bg-[#F8F1E4] cultural-card">
+            <div class="flex flex-col sm:flex-row">
+              <img
+                src="https://media.vietnamplus.vn/images/7c3ef6dd8e2688539269d4983c3dc98822946e26bdae0c61e0d9f104937a6dd1fb1b1b6429c277aac5a37baf01298cae/ttxvn-hat-xoan-0608.jpg"
+                alt="Nghệ nhân biểu diễn Hát Xoan tại Phú Thọ"
+                class="w-full sm:w-44 h-60 sm:h-auto object-cover"
+                loading="lazy"
+              />
+              <div class="p-6">
+                <div class="text-xs uppercase tracking-[.18em] text-xoan-red font-semibold">Trùm phường Xoan · nguồn 2025</div>
+                <h3 class="mt-2 font-serifvn text-2xl">Nguyễn Xuân Hội</h3>
+                <p class="mt-3 text-sm text-xoan-wood/72 leading-6">
+                  Bài viết của Bộ Văn hóa, Thể thao và Du lịch năm 2025 ghi nhận ông Nguyễn Xuân Hội là <b>Trùm phường Xoan Phù Đức, xã Kim Đức</b>; phường tổ chức ôn luyện các làn điệu Xoan để phục vụ biểu diễn dịp Giỗ Tổ Hùng Vương.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">Phù Đức</span>
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">Kim Đức</span>
+                  <span class="rounded-full bg-white px-3 py-1.5 border border-xoan-wood/10">Nguồn: Bộ VHTTDL</span>
+                </div>
+                <a target="_blank" rel="noopener noreferrer" href="https://bvhttdl.gov.vn/gio-to-hung-vuong-nam-2025-de-cau-xoan-vang-vong-duoi-chan-nui-hung-20250326095223989.htm" class="inline-flex mt-5 text-sm font-semibold text-xoan-red hover:underline">
+                  Xem nguồn xác minh →
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-10 rounded-[26px] border border-xoan-gold/25 bg-xoan-cream p-5 sm:p-6">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 w-11 h-11 rounded-2xl bg-xoan-gold/20 text-xoan-wood flex items-center justify-center text-xl">✓</div>
+            <div>
+              <h3 class="font-semibold text-xoan-ink">Tư liệu UNESCO về nghệ nhân</h3>
+              <p class="mt-1 text-sm text-xoan-wood/70 leading-6">
+                Hồ sơ UNESCO năm 2017 nêu vai trò của các nghệ nhân trùm và minh họa việc truyền dạy trong phường Kim Đới; một tư liệu UNESCO năm 2016 ghi rõ bà Nguyễn Thị Lịch ký cam kết đại diện phường An Thái trong quá trình lập hồ sơ đề cử.
+              </p>
+              <a target="_blank" rel="noopener noreferrer" href="https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260" class="inline-flex mt-3 text-sm font-semibold text-xoan-red hover:underline">Mở hồ sơ UNESCO →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 phường Xoan gốc -->
+        <div class="mt-16">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.25em] text-xoan-red">Bản đồ cộng đồng</p>
+              <h3 class="mt-2 font-serifvn text-3xl sm:text-4xl text-xoan-ink">Bốn phường Xoan gốc</h3>
+            </div>
+            <p class="max-w-xl text-sm text-xoan-wood/65 leading-6">
+              Theo hồ sơ kiểm kê Xoan gửi UNESCO, bốn phường truyền thống gồm An Thái, Phù Đức, Kim Đới và Thét. Tư liệu kiểm kê 2015 ghi Phù Đức, Kim Đới và Thét ở Kim Đức; An Thái ở Phượng Lâu.
+            </p>
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <article class="rounded-[26px] border border-xoan-wood/10 bg-[#F8F1E4] p-6 cultural-card">
+              <div class="flex items-center justify-between">
+                <span class="w-11 h-11 rounded-2xl bg-xoan-red text-white flex items-center justify-center font-bold">01</span>
+                <span class="text-xs rounded-full bg-white px-3 py-1 border border-xoan-wood/10 text-xoan-wood/65">Phượng Lâu</span>
+              </div>
+              <h4 class="mt-5 font-serifvn text-2xl">Phường An Thái</h4>
+              <p class="mt-2 text-sm text-xoan-wood/70 leading-6">
+                Một trong bốn phường Xoan truyền thống. UNESCO và Bộ VHTTDL ghi nhận An Thái gắn với xã Phượng Lâu, thành phố Việt Trì; nghệ nhân Nguyễn Thị Lịch được ghi nhận là Trùm phường An Thái trong các nguồn nêu trên.
+              </p>
+              <div class="mt-4 text-xs text-xoan-wood/55">Nguồn chính: UNESCO · Bộ VHTTDL</div>
+            </article>
+
+            <article class="rounded-[26px] border border-xoan-wood/10 bg-[#F8F1E4] p-6 cultural-card">
+              <div class="flex items-center justify-between">
+                <span class="w-11 h-11 rounded-2xl bg-xoan-moss text-white flex items-center justify-center font-bold">02</span>
+                <span class="text-xs rounded-full bg-white px-3 py-1 border border-xoan-wood/10 text-xoan-wood/65">Kim Đức</span>
+              </div>
+              <h4 class="mt-5 font-serifvn text-2xl">Phường Phù Đức</h4>
+              <p class="mt-2 text-sm text-xoan-wood/70 leading-6">
+                Một trong ba phường được hồ sơ kiểm kê 2015 xác định ở Kim Đức. Nguồn Bộ VHTTDL năm 2025 ghi nhận Trùm phường là Nguyễn Xuân Hội và cho biết phường duy trì luyện tập, biểu diễn phục vụ cộng đồng và du khách.
+              </p>
+              <div class="mt-4 text-xs text-xoan-wood/55">Nguồn chính: UNESCO inventory · Bộ VHTTDL 2025</div>
+            </article>
+
+            <article class="rounded-[26px] border border-xoan-wood/10 bg-[#F8F1E4] p-6 cultural-card">
+              <div class="flex items-center justify-between">
+                <span class="w-11 h-11 rounded-2xl bg-xoan-gold text-xoan-ink flex items-center justify-center font-bold">03</span>
+                <span class="text-xs rounded-full bg-white px-3 py-1 border border-xoan-wood/10 text-xoan-wood/65">Kim Đức</span>
+              </div>
+              <h4 class="mt-5 font-serifvn text-2xl">Phường Thét</h4>
+              <p class="mt-2 text-sm text-xoan-wood/70 leading-6">
+                Phường Xoan truyền thống được UNESCO liệt kê cùng Phù Đức và Kim Đới trong nhóm phường ở Kim Đức. Đình Thét là một trong những không gian văn hóa gắn với thực hành Xoan tại địa phương.
+              </p>
+              <div class="mt-4 text-xs text-xoan-wood/55">Nguồn chính: UNESCO inventory · thông tin di sản Phú Thọ</div>
+            </article>
+
+            <article class="rounded-[26px] border border-xoan-wood/10 bg-[#F8F1E4] p-6 cultural-card">
+              <div class="flex items-center justify-between">
+                <span class="w-11 h-11 rounded-2xl bg-xoan-wood text-white flex items-center justify-center font-bold">04</span>
+                <span class="text-xs rounded-full bg-white px-3 py-1 border border-xoan-wood/10 text-xoan-wood/65">Kim Đức</span>
+              </div>
+              <h4 class="mt-5 font-serifvn text-2xl">Phường Kim Đới</h4>
+              <p class="mt-2 text-sm text-xoan-wood/70 leading-6">
+                Phường Xoan truyền thống ở Kim Đức. UNESCO từng giới thiệu hình ảnh ông Nguyễn Văn Quyết (sinh năm 1986) với tư cách lãnh đạo phường Kim Đới trong tư liệu năm 2016; chức danh này được giữ nguyên theo mốc nguồn, không suy diễn thành chức danh hiện tại.
+              </p>
+              <div class="mt-4 text-xs text-xoan-wood/55">Nguồn chính: UNESCO · tư liệu 2016</div>
+            </article>
+          </div>
+
+          <div class="mt-6 text-xs text-xoan-wood/55 leading-5">
+            <b>Lưu ý tên gọi:</b> một số tài liệu/website có thể viết “Kim Đái”; trong hồ sơ kiểm kê UNESCO và nguồn Bộ VHTTDL được dùng cho trang này, tên “Kim Đới” xuất hiện rõ ràng. Khi làm bản chính thức, nên thống nhất một cách viết theo hồ sơ chuyên ngành mà bạn chọn làm chuẩn.
+          </div>
+        </div>
+
+        <!-- Nguồn sạch -->
+        <div class="mt-12 rounded-[28px] bg-xoan-ink text-white p-6 sm:p-8">
+          <div class="text-xs uppercase tracking-[.2em] text-xoan-gold font-semibold">Nguồn đã đối chiếu</div>
+          <div class="mt-4 grid sm:grid-cols-2 gap-3 text-sm">
+            <a target="_blank" rel="noopener noreferrer" href="https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260" class="rounded-2xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition">UNESCO · Hồ sơ Hát Xoan 2017 →</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://ich.unesco.org/doc/src/33433.pdf" class="rounded-2xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition">UNESCO · Hồ sơ kiểm kê Xoan 2015 →</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://bvhttdl.gov.vn/phu-tho-bao-ton-va-phat-huy-gia-tri-di-san-van-hoa-vung-dat-to-20210913075256148.htm" class="rounded-2xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition">Bộ VHTTDL · Nguyễn Thị Lịch →</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://bvhttdl.gov.vn/gio-to-hung-vuong-nam-2025-de-cau-xoan-vang-vong-duoi-chan-nui-hung-20250326095223989.htm" class="rounded-2xl bg-white/5 border border-white/10 p-4 hover:bg-white/10 transition">Bộ VHTTDL · Phù Đức 2025 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="bg-[#20120e] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid md:grid-cols-[1.2fr_.8fr_.8fr] gap-10">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full border border-xoan-gold/50 flex items-center justify-center text-xoan-gold">✿</div>
+            <div>
+              <div class="font-serifvn text-xl">HÁT XOAN</div>
+              <div class="text-xs text-white/50 tracking-[.16em] uppercase">Di sản trong tầm tay</div>
+            </div>
+          </div>
+          <p class="mt-5 max-w-xl text-sm text-white/55 leading-7">
+            Không gian giới thiệu và trải nghiệm số về Hát Xoan Phú Thọ – kết hợp nội dung di sản, đa phương tiện và công nghệ thực tế tăng cường.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-xoan-gold">Khám phá</h3>
+          <div class="mt-4 grid gap-2 text-sm text-white/55">
+            <a href="#lich-su" class="hover:text-white transition">Lịch sử & nguồn gốc</a>
+            <a href="#ba-chang" class="hover:text-white transition">Ba chặng hát</a>
+            <a href="#lan-dieu" class="hover:text-white transition">Làn điệu</a>
+            <a href="#thu-vien" class="hover:text-white transition">Thư viện</a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-xoan-gold">Nguồn tham khảo</h3>
+          <div class="mt-4 grid gap-2 text-sm text-white/55">
+            <a target="_blank" rel="noopener noreferrer" href="https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260" class="hover:text-white transition">UNESCO ICH</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://dulichphutho.gov.vn/diemden/hat-xoan-phu-tho" class="hover:text-white transition">Du lịch Phú Thọ</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://commons.wikimedia.org/wiki/File:Hatxoan.jpg" class="hover:text-white transition">Wikimedia Commons</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-white/40">
+        <span>© <span id="year"></span> Hát Xoan – Prototype giao diện website.</span>
+        <span>Nội dung cần tiếp tục đối chiếu với tư liệu chuyên ngành khi triển khai chính thức.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       SEARCH MODAL
+       ========================================================= -->
+  <div id="searchModal" class="fixed inset-0 z-[80] hidden">
+    <div id="searchBackdrop" class="absolute inset-0 bg-[#1c0d09]/70 backdrop-blur-sm"></div>
+    <div class="relative max-w-2xl mx-auto mt-28 px-4">
+      <div class="rounded-[28px] bg-[#FFF9ED] shadow-2xl overflow-hidden border border-xoan-gold/25">
+        <div class="p-5 border-b border-xoan-wood/10 flex items-center gap-3">
+          <span class="text-xoan-wood/50">⌕</span>
+          <input id="searchInput" autofocus type="search"
+                 placeholder="Tìm: Thơ nhang, quả cách, phường Xoan..."
+                 class="min-w-0 flex-1 bg-transparent outline-none text-xoan-ink" />
+          <button id="closeSearch" class="text-xoan-wood/60 hover:text-xoan-red">Đóng</button>
+        </div>
+
+        <div id="searchResults" class="p-5 grid gap-2 text-sm">
+          <button data-jump="#lich-su" class="search-result text-left rounded-2xl p-4 hover:bg-xoan-cream transition">
+            <b>Lịch sử & nguồn gốc</b><div class="text-xoan-wood/60 mt-1">Truyền thuyết, không gian cửa đình, UNESCO.</div>
+          </button>
+          <button data-jump="#ba-chang" class="search-result text-left rounded-2xl p-4 hover:bg-xoan-cream transition">
+            <b>Ba chặng hát Xoan</b><div class="text-xoan-wood/60 mt-1">Hát nghi lễ · Quả cách · Hát hội/giao duyên.</div>
+          </button>
+          <button data-jump="#lan-dieu" class="search-result text-left rounded-2xl p-4 hover:bg-xoan-cream transition">
+            <b>Làn điệu & audio</b><div class="text-xoan-wood/60 mt-1">Thơ nhang · Đóng đám · Hát hội.</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       CAMERA AR OVERLAY
+       Không còn là một mục nội dung trên trang chủ. Overlay chỉ xuất hiện
+       khi người dùng bấm “Bắt đầu trải nghiệm AR” và camera được mở trực tiếp.
+       ========================================================= -->
+  <div id="arCamera" class="hidden fixed inset-0 z-[120] bg-black text-white">
+    <video id="arVideo" class="absolute inset-0 w-full h-full object-cover" autoplay playsinline muted></video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/55 pointer-events-none"></div>
+
+    <div class="absolute top-0 left-0 right-0 p-4 sm:p-5 pt-[calc(1rem+env(safe-area-inset-top))] flex items-center justify-between gap-3">
+      <button id="closeARCamera" type="button" class="w-11 h-11 rounded-full bg-black/45 border border-white/20 backdrop-blur flex items-center justify-center text-xl hover:bg-black/65 transition" aria-label="Thoát camera">←</button>
+      <div class="rounded-full bg-black/45 border border-white/15 backdrop-blur px-4 py-2 text-xs sm:text-sm">Hát Xoan · Trải nghiệm AR</div>
+      <button id="switchCamera" type="button" class="w-11 h-11 rounded-full bg-black/45 border border-white/20 backdrop-blur flex items-center justify-center text-lg hover:bg-black/65 transition" aria-label="Đổi camera">↻</button>
+    </div>
+
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none px-8">
+      <div class="relative w-[min(82vw,360px)] aspect-square rounded-[34px] border-2 border-white/80 shadow-[0_0_0_9999px_rgba(0,0,0,.12)]">
+        <span class="absolute -top-1 -left-1 w-12 h-12 border-l-4 border-t-4 border-xoan-gold rounded-tl-[18px]"></span>
+        <span class="absolute -top-1 -right-1 w-12 h-12 border-r-4 border-t-4 border-xoan-gold rounded-tr-[18px]"></span>
+        <span class="absolute -bottom-1 -left-1 w-12 h-12 border-l-4 border-b-4 border-xoan-gold rounded-bl-[18px]"></span>
+        <span class="absolute -bottom-1 -right-1 w-12 h-12 border-r-4 border-b-4 border-xoan-gold rounded-br-[18px]"></span>
+      </div>
+    </div>
+
+    <div class="absolute left-1/2 -translate-x-1/2 bottom-8 sm:bottom-10 text-center w-[calc(100%-32px)] max-w-md">
+      <div id="arStatus" class="rounded-2xl bg-black/55 border border-white/15 backdrop-blur px-5 py-3 text-sm leading-5">
+        Đang khởi động camera…
+      </div>
+      <div class="mt-3 text-[11px] text-white/65">Đưa poster Hát Xoan vào khung để bắt đầu nhận diện.</div>
+    </div>
+
+    <div id="arError" class="hidden absolute inset-x-4 bottom-24 sm:bottom-28 max-w-lg mx-auto rounded-2xl bg-[#FFF9ED] text-xoan-ink p-5 shadow-2xl">
+      <div class="font-semibold">Không thể mở camera</div>
+      <p id="arErrorText" class="mt-2 text-sm text-xoan-wood/70 leading-6"></p>
+      <button id="retryAR" type="button" class="mt-4 w-full rounded-xl bg-xoan-red text-white py-3 font-semibold">Thử lại</button>
+    </div>
+  </div>
+
+
+
+  <!-- Thanh thao tác cố định dành riêng cho điện thoại -->
+  <div class="mobile-action-bar">
+    <button id="mobileArBtn" class="mobile-ar" type="button">
+      <span>⌾</span> Trải nghiệm AR
+    </button>
+    <button id="mobileChatBtn" class="mobile-chat" type="button">
+      <span>💬</span> Hỏi về Hát Xoan
+    </button>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[100] hidden">
+    <div class="rounded-full bg-[#21130f] text-white px-5 py-3 text-sm shadow-2xl border border-white/10"></div>
+  </div>
+
+  <script>
+    /* =========================================================
+       JAVASCRIPT
+       ========================================================= */
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    // Năm footer
+    $("#year").textContent = new Date().getFullYear();
+
+    // Navbar đổi nền khi cuộn
+    window.addEventListener("scroll", () => {
+      const nav = $("#navbar");
+      if (window.scrollY > 20) {
+        nav.classList.add("bg-[#20120e]/95");
+      } else {
+        nav.classList.remove("bg-[#20120e]/95");
+      }
+    });
+
+    // Mobile menu
+    $("#menuBtn").addEventListener("click", () => {
+      $("#mobileMenu").classList.toggle("hidden");
+    });
+
+    $$(".mobile-link").forEach(link => {
+      link.addEventListener("click", () => $("#mobileMenu").classList.add("hidden"));
+    });
+
+    // Search modal
+    const searchModal = $("#searchModal");
+    const openSearch = () => {
+      searchModal.classList.remove("hidden");
+      setTimeout(() => $("#searchInput").focus(), 40);
+    };
+    const closeSearch = () => searchModal.classList.add("hidden");
+
+    $("#searchBtn").addEventListener("click", openSearch);
+    $("#closeSearch").addEventListener("click", closeSearch);
+    $("#searchBackdrop").addEventListener("click", closeSearch);
+
+    // ESC để đóng modal
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeSearch();
+        stopARCamera();
+      }
+    });
+
+    // Tìm kiếm nhanh trên các tiêu đề / mô tả demo
+    $("#searchInput").addEventListener("input", (event) => {
+      const keyword = event.target.value.trim().toLowerCase();
+
+      $$(".search-result").forEach(item => {
+        item.classList.toggle("hidden", keyword && !item.innerText.toLowerCase().includes(keyword));
+      });
+    });
+
+    $$(".search-result").forEach(btn => {
+      btn.addEventListener("click", () => {
+        closeSearch();
+        const target = btn.dataset.jump;
+        document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+
+    // Trên điện thoại: chatbot đóng mặc định và mở từ thanh thao tác bên dưới.
+    function syncMobileChatState() {
+      if (window.innerWidth <= 767) {
+        if (!sessionStorage.getItem("xoanMobileChatReady")) {
+          $("#chatbot").classList.add("hidden");
+          sessionStorage.setItem("xoanMobileChatReady", "1");
+        }
+      } else {
+        $("#chatbot").classList.remove("hidden");
+      }
+    }
+    syncMobileChatState();
+    window.addEventListener("resize", syncMobileChatState);
+
+    $("#mobileChatBtn")?.addEventListener("click", () => {
+      $("#chatbot").classList.remove("hidden");
+      $("#chatbot").classList.add("float-in");
+    });
+
+    // Chatbot mô phỏng phản hồi.
+    const chatbotAnswers = {
+      "hát xoan là gì?":
+        "Hát Xoan là nghệ thuật trình diễn dân gian của Phú Thọ, gồm hát, múa, trống và phách; di sản gắn với tín ngưỡng thờ Hùng Vương và sinh hoạt cộng đồng.",
+      "có mấy chặng?":
+        "Hát Xoan thường được giới thiệu theo ba chặng: hát nghi lễ (hát thờ), hát quả cách và hát hội/giao duyên."
+    };
+
+    function showChatReply(text) {
+      const box = $("#chatReply");
+      box.textContent = text;
+      box.classList.remove("hidden");
+    }
+
+    $$(".quick-q").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const q = btn.textContent.trim().toLowerCase();
+        $("#chatInput").value = btn.textContent.trim();
+        showChatReply(chatbotAnswers[q] || "Bạn có thể hỏi về lịch sử, ba chặng hát, không gian diễn xướng hoặc nghệ nhân Xoan.");
+      });
+    });
+
+    $("#sendChat").addEventListener("click", () => {
+      const question = $("#chatInput").value.trim();
+      if (!question) {
+        showChatReply("Hãy nhập một câu hỏi. Ví dụ: “Hát Xoan có mấy chặng?”");
+        return;
+      }
+
+      const normalized = question.toLowerCase();
+      if (normalized.includes("mấy chặng") || normalized.includes("bao nhiêu chặng")) {
+        showChatReply(chatbotAnswers["có mấy chặng?"]);
+      } else if (normalized.includes("hát xoan là gì") || normalized.includes("xoan là gì")) {
+        showChatReply(chatbotAnswers["hát xoan là gì?"]);
+      } else {
+        showChatReply("Đây là chatbot giao diện. Khi triển khai thật, bạn có thể nối ô này với API/LLM hoặc cơ sở dữ liệu câu hỏi – đáp về Hát Xoan.");
+      }
+    });
+
+    $("#chatInput").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") $("#sendChat").click();
+    });
+
+    $("#closeChat").addEventListener("click", () => {
+      $("#chatbot").classList.add("hidden");
+    });
+
+    // Demo audio:
+    // ===============================
+    // AUDIO PLAYER - PHÁT FILE MP3 THẬT
+    // ===============================
+
+    let activeButton = null;
+    let activeAudio = null;
+
+
+    // Đổi giây thành phút:giây
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) return "0:00";
+
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+
+      return `${mins}:${String(secs).padStart(2, "0")}`;
+    }
+
+
+    // ===============================
+    // RESET TẤT CẢ AUDIO
+    // ===============================
+
+    function stopAudioUI() {
+
+      $$(".audio-btn").forEach(btn => {
+
+        // Dừng audio đang phát
+        if (btn._audio) {
+          btn._audio.pause();
+          btn._audio.currentTime = 0;
+          btn._audio = null;
+        }
+
+        // Đổi nút về Play
+        btn.dataset.playing = "false";
+
+        btn.innerHTML = `
+          <svg
+            class="play-svg w-5 h-5 ml-0.5"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        `;
+
+        // Reset thanh tiến trình
+        const card = btn.closest("article");
+
+        if (card) {
+
+          const progress = $(".audio-progress", card);
+          const timeLabel = $(".audio-time", card);
+
+          if (progress) {
+            progress.style.width = "0%";
+          }
+
+          if (timeLabel) {
+            timeLabel.textContent = "0:00";
+          }
+        }
+
+      });
+
+      activeButton = null;
+      activeAudio = null;
+    }
+
+
+    // ===============================
+    // XỬ LÝ NÚT AUDIO
+    // ===============================
+
+    $$(".audio-btn").forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        const card = btn.closest("article");
+
+        const progress = $(".audio-progress", card);
+        const timeLabel = $(".audio-time", card);
+
+        const audioSrc = btn.dataset.audio;
+
+
+        // Không có đường dẫn MP3
+        if (!audioSrc) {
+
+          console.error("Chưa có đường dẫn audio:", btn);
+
+          showToast("Chưa có file âm thanh.");
+
+          return;
+        }
+
+
+        // ===========================
+        // NẾU ĐANG PHÁT BÀI NÀY
+        // ===========================
+
+        if (activeButton === btn && activeAudio) {
+
+          activeAudio.pause();
+
+          btn.dataset.playing = "false";
+
+          btn.innerHTML = `
+            <svg
+              class="play-svg w-5 h-5 ml-0.5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          `;
+
+          activeButton = null;
+          activeAudio = null;
+
+          return;
+        }
+
+
+        // ===========================
+        // DỪNG BÀI KHÁC
+        // ===========================
+
+        stopAudioUI();
+
+
+        // ===========================
+        // TẠO FILE MP3 THẬT
+        // ===========================
+
+        const audio = new Audio(audioSrc);
+
+        btn._audio = audio;
+
+        activeAudio = audio;
+        activeButton = btn;
+
+        btn.dataset.playing = "true";
+
+
+        // Đổi Play → Pause
+        btn.innerHTML = `
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M7 6h3v12H7zM14 6h3v12h-3z"/>
+          </svg>
+        `;
+
+
+        // ===========================
+        // KHI BIẾT THỜI LƯỢNG MP3
+        // ===========================
+
+        audio.addEventListener("loadedmetadata", () => {
+
+          const duration = audio.duration;
+
+          timeLabel.textContent =
+            `0:00 / ${formatTime(duration)}`;
+
+        });
+
+
+        // ===========================
+        // ĐANG PHÁT
+        // ===========================
+
+        audio.addEventListener("timeupdate", () => {
+
+          if (!audio.duration) return;
+
+          const percent =
+            (audio.currentTime / audio.duration) * 100;
+
+          progress.style.width = `${percent}%`;
+
+          timeLabel.textContent =
+            `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+
+        });
+
+
+        // ===========================
+        // PHÁT HẾT
+        // ===========================
+
+        audio.addEventListener("ended", () => {
+
+          progress.style.width = "100%";
+
+          timeLabel.textContent =
+            `${formatTime(audio.duration)} / ${formatTime(audio.duration)}`;
+
+          btn.dataset.playing = "false";
+
+          btn.innerHTML = `
+            <svg
+              class="play-svg w-5 h-5 ml-0.5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          `;
+
+          btn._audio = null;
+
+          activeButton = null;
+          activeAudio = null;
+
+        });
+
+
+        // ===========================
+        // LỖI FILE MP3
+        // ===========================
+
+        audio.addEventListener("error", () => {
+
+          console.error(
+            "Không thể phát file:",
+            audioSrc
+          );
+
+          btn.dataset.playing = "false";
+
+          btn.innerHTML = `
+            <svg
+              class="play-svg w-5 h-5 ml-0.5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          `;
+
+          progress.style.width = "0%";
+
+          timeLabel.textContent = "0:00";
+
+          activeButton = null;
+          activeAudio = null;
+
+          showToast("Không thể phát file âm thanh.");
+
+        });
+
+
+        // ===========================
+        // BẮT ĐẦU PHÁT
+        // ===========================
+
+        audio.play().catch(error => {
+
+          console.error(
+            "Không thể bắt đầu phát audio:",
+            error
+          );
+
+          showToast("Không thể phát âm thanh.");
+
+        });
+
+      });
+
+    });
+
+    // =========================================================
+    // CAMERA AR: mở trực tiếp khi người dùng bấm CTA.
+    // Đây là lớp camera thật bằng getUserMedia. Khi bạn đã có
+    // target .mind/MindAR hoặc ZapWorks, đây là điểm để nối
+    // bộ nhận diện poster và các lớp nội dung nổi.
+    // =========================================================
+    let arStream = null;
+    let currentCamera = "environment";
+
+    function setARStatus(text) {
+      const box = $("#arStatus");
+      if (box) box.textContent = text;
+    }
+
+    async function startARCamera() {
+      const overlay = $("#arCamera");
+      const video = $("#arVideo");
+      const errorBox = $("#arError");
+
+      overlay.classList.remove("hidden");
+      errorBox.classList.add("hidden");
+      setARStatus("Đang xin quyền truy cập camera…");
+
+      try {
+        if (!window.isSecureContext && location.hostname !== "localhost") {
+          throw new Error("Camera trên trình duyệt điện thoại cần HTTPS. Hãy chạy website bằng hosting HTTPS hoặc localhost.");
+        }
+
+        // Dừng stream cũ trước khi xin camera mới.
+        stopARStreamOnly();
+
+        arStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: currentCamera },
+            width: { ideal: 1920 },
+            height: { ideal: 1080 }
+          },
+          audio: false
+        });
+
+        video.srcObject = arStream;
+        await video.play();
+        setARStatus("Camera đã sẵn sàng · Đưa poster Hát Xoan vào khung hình");
+      } catch (error) {
+        console.error(error);
+        overlay.classList.remove("hidden");
+        errorBox.classList.remove("hidden");
+        $("#arErrorText").textContent = error?.message || "Trình duyệt không cho phép truy cập camera. Hãy kiểm tra quyền Camera của website.";
+        setARStatus("Chưa thể khởi động camera");
+      }
+    }
+
+    function stopARStreamOnly() {
+      if (arStream) {
+        arStream.getTracks().forEach(track => track.stop());
+        arStream = null;
+      }
+      const video = $("#arVideo");
+      if (video) video.srcObject = null;
+    }
+
+    function stopARCamera() {
+      stopARStreamOnly();
+      $("#arCamera").classList.add("hidden");
+      $("#arError").classList.add("hidden");
+    }
+
+    $("#startARHero")?.addEventListener("click", startARCamera);
+    $("#mobileArBtn")?.addEventListener("click", startARCamera);
+    $("#closeARCamera")?.addEventListener("click", stopARCamera);
+    $("#retryAR")?.addEventListener("click", startARCamera);
+
+    $("#switchCamera")?.addEventListener("click", async () => {
+      currentCamera = currentCamera === "environment" ? "user" : "environment";
+      await startARCamera();
+    });
+
+    // Cho phép mở trực tiếp camera bằng URL ?ar=1.
+    if (new URLSearchParams(location.search).get("ar") === "1") {
+      startARCamera();
+    }
+
+    // Toast
+    function showToast(message) {
+      const toast = $("#toast");
+      const content = toast.firstElementChild;
+      content.textContent = message;
+      toast.classList.remove("hidden");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.add("hidden"), 2600);
+    }
+
+    //
+    
+
+    // Nút "Xem 3 nhóm tư liệu"
+    $("#filterAll").addEventListener("click", () => {
+      showToast("Trang hiện tập trung vào 3 nhóm: không gian diễn xướng, truyền dạy qua thế hệ và trống – phách.");
+    });
+
+  </script>
+
+  <!--
+    =========================================================
+    GHI CHÚ NỘI DUNG / NGUỒN
+    =========================================================
+    - UNESCO: Xoan singing of Phú Thọ province, Viet Nam – Representative List, 2017.
+      https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260
+    - Cổng thông tin Du lịch Phú Thọ – Hát Xoan Phú Thọ.
+      https://dulichphutho.gov.vn/diemden/hat-xoan-phu-tho
+    - Bộ VHTTDL: bài viết về ba chặng hát chính và hoạt động giới thiệu Hát Xoan.
+      https://bvhttdl.gov.vn/giu-gin-va-lan-toa-di-san-hat-xoan-phu-tho-tren-khong-gian-mang-20240326153625535.htm
+    - Ảnh Hatxoan.jpg từ Wikimedia Commons – CC BY-SA 4.0.
+      https://commons.wikimedia.org/wiki/File:Hatxoan.jpg
+
+    LƯU Ý:
+    1) Ảnh từ website báo chí/cổng du lịch nên được kiểm tra quyền sử dụng trước khi đưa lên website công khai.
+    2) Các audio trong bản demo chỉ là âm thanh mô phỏng bằng Web Audio, không phải bản thu Hát Xoan.
+    3) Nút “Bắt đầu trải nghiệm AR” mở camera trực tiếp bằng getUserMedia.
+       Muốn nhận diện poster và bám nội dung theo ảnh mục tiêu, nối lớp camera này với MindAR/ZapWorks và file target .mind của dự án.
+    4) Nội dung “Người giữ lửa” đã được bổ sung từ các nguồn UNESCO và Bộ VHTTDL; các chức danh có mốc năm được ghi rõ để tránh suy diễn.
+    =========================================================
+  -->
+</body>
+</html>

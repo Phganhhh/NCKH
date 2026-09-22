@@ -1,0 +1,96 @@
+{
+  "note": "Thay đổi URL trong file này, sau đó copy URL mới vào index.html tại vị trí tương ứng.",
+  "images": [
+    {
+      "section": "hero",
+      "filename": "hero-hat-xoan.jpg",
+      "path": "images/hero-hat-xoan.jpg",
+      "current_url": "local",
+      "description": "Ảnh nền banner trang chủ (Hát Xoan)"
+    },
+    {
+      "section": "di-san",
+      "filename": "di-san-1.jpg",
+      "path": "images/di-san-1.jpg",
+      "current_url": "https://cdn-images.vtv.vn/zoom/700_438/2023/1/9/anh-thumb-2-16732381994801198885043-crop-16732382204211015997853.jpg",
+      "description": "Ảnh thẻ Di sản 1"
+    },
+    {
+      "section": "di-san",
+      "filename": "di-san-2.jpg",
+      "path": "images/di-san-2.jpg",
+      "current_url": "https://media.baovanhoa.vn/zoom/1000/uploaded/phamhuyan/2026_03_28/25_cbqv.jpg",
+      "description": "Ảnh thẻ Di sản 2"
+    },
+    {
+      "section": "di-san",
+      "filename": "di-san-3.png",
+      "path": "images/di-san-3.png",
+      "current_url": "https://phunuvietnam.mediacdn.vn/179072216278405120/2021/10/16/nguyen-thi-lich-1-16343526258771635234154.png",
+      "description": "Ảnh thẻ Di sản 3"
+    },
+    {
+      "section": "lich-su",
+      "filename": "1.lichsu.jpg",
+      "path": "images/1.lichhsu.jpg",
+      "current_url": "https://image.plo.vn/w1000/Uploaded/2026/ernccqrwq/2024_03_23/ve-dat-to-nghe-nghe-nhan-hat-xoan-loi-co-8-532.jpg.webp",
+      "description": "Ảnh phần Lịch sử"
+    },
+    {
+      "section": "ba-chang",
+      "filename": "ba-chang-1.jpg",
+      "path": "images/ba-chang-1.jpg",
+      "current_url": "https://image.vovworld.vn/w730/uploaded/vovworld/pwvopivp/2019_04_12/pst7-02_eghz.jpg",
+      "description": "Ảnh Ba chàng 1"
+    },
+    {
+      "section": "ba-chang",
+      "filename": "ba-chang-2.jpg",
+      "path": "images/ba-chang-2.jpg",
+      "current_url": "https://cly.1cdn.vn/2020/04/04/congly-vn_nghin-nam-khuc-hat-mon-dinh-hinh-anh0721812085.jpg",
+      "description": "Ảnh Ba chàng 2"
+    },
+    {
+      "section": "ba-chang",
+      "filename": "ba-chang-3.JPG",
+      "path": "images/ba-chang-3.JPG",
+      "current_url": "https://imgovietnam.vietnamnews.vn/MediaUpload/Article/2026/4/23/498442-Commentary-3.JPG",
+      "description": "Ảnh Ba chàng 3"
+    },
+    {
+      "section": "thu-vien",
+      "filename": "thu-vien-1.jpg",
+      "path": "images/thu-vien-1.jpg",
+      "current_url": "https://media.baovanhoa.vn/uploaded/phamhuyan/2026_03_28/18_fich.jpg",
+      "description": "Ảnh Thư viện 1"
+    },
+    {
+      "section": "thu-vien",
+      "filename": "thu-vien-2.jpg",
+      "path": "images/thu-vien-2.jpg",
+      "current_url": "https://thethaovanhoa.mediacdn.vn/Upload/3uPkfvAxvuOpUQrmKeiDaA/files/2018/11/A/09/xoan.jpg",
+      "description": "Ảnh Thư viện 2"
+    },
+    {
+      "section": "thu-vien",
+      "filename": "thu-vien-3.jpg",
+      "path": "images/thu-vien-3.jpg",
+      "current_url": "https://static-images.vnncdn.net/files/publish/2023/6/20/phu-tho-bao-ton-di-san-hat-xoan-gan-voi-du-lich-trai-nghiem-200.jpg",
+      "description": "Ảnh Thư viện 3"
+    },
+    {
+      "section": "nghe-nhan",
+      "filename": "nghe-nhan-1.jpg",
+      "path": "images/nghe-nhan-1.jpg",
+      "current_url": "https://clu.1cdn.vn/thumbs/1200x630/2021/10/02/congluan-cdn.congluan.vn-files-content-2021-10-02-_nghe-nhan-nguyen-thi-lich-nguoi-mang-duyen-no-voi-hat-xoan-101852802.jpg",
+      "description": "Ảnh Nghệ nhân 1"
+    },
+    {
+      "section": "nghe-nhan",
+      "filename": "nghe-nhan-2.jpg",
+      "path": "images/nghe-nhan-2.jpg",
+      "current_url": "https://media.vietnamplus.vn/images/7c3ef6dd8e2688539269d4983c3dc98822946e26bdae0c61e0d9f104937a6dd1fb1b1b6429c277aac5a37baf01298cae/ttxvn-hat-xoan-0608.jpg",
+      "description": "Ảnh Nghệ nhân 2"
+    }
+  ]
+}
