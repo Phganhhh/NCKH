@@ -1179,56 +1179,41 @@
     // Tạo DOM floating chatbot
     const _chatWrap = document.createElement('div');
     _chatWrap.innerHTML = `
-      <button id="xoan-fab" aria-label="Mở chatbot Hát Xoan"
-        style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom, 0px));right:20px;z-index:9999;
-               width:60px;height:60px;border-radius:50%;
-               background:linear-gradient(135deg,#8B2F26,#A83A31);
-               border:2.5px solid rgba(216,184,115,.7);
-               box-shadow:0 8px 32px rgba(55,20,15,.38);
-               display:flex;align-items:center;justify-content:center;
-               cursor:pointer;transition:transform .2s,box-shadow .2s;
-               color:white;font-size:26px;outline:none;">
+      <!-- Backdrop mờ khi mở chat trên mobile -->
+      <div id="xoan-chat-backdrop"></div>
+
+      <!-- Nút tròn nổi mở chat -->
+      <button id="xoan-fab" aria-label="Mở chatbot Hát Xoan">
         💬
       </button>
 
-      <div id="xoan-chat-panel"
-        style="display:none;position:fixed;bottom:calc(90px + env(safe-area-inset-bottom, 0px));right:16px;z-index:9998;
-               width:min(380px,calc(100vw - 32px));
-               border-radius:24px;overflow:hidden;
-               border:1px solid rgba(216,184,115,.45);
-               box-shadow:0 25px 70px rgba(40,15,10,.28);
-               background:#FFFBF2;
-               font-family:'Be Vietnam Pro',Arial,sans-serif;
-               animation:floatIn .22s ease both;">
-
-        <div style="background:linear-gradient(90deg,#8B2F26,#A83A31);padding:16px 20px;position:relative;">
-          <button id="xoan-chat-close" aria-label="Đóng chatbot"
-            style="position:absolute;right:12px;top:10px;width:30px;height:30px;
-                   border-radius:50%;background:rgba(255,255,255,.15);
-                   border:none;color:white;cursor:pointer;font-size:18px;
-                   display:flex;align-items:center;justify-content:center;">×</button>
-          <div style="display:flex;align-items:center;gap:12px;padding-right:36px;">
-            <div style="width:42px;height:42px;border-radius:50%;background:#F4D39B;
-                        border:2px solid rgba(255,255,255,.6);
-                        display:flex;align-items:center;justify-content:center;font-size:22px;">🧒🏻</div>
-            <div>
-              <div style="color:white;font-weight:600;font-size:15px;">Hỏi đáp về Hát Xoan</div>
-              <div style="color:rgba(255,255,255,.7);font-size:11px;">Trợ lý di sản · Gemini + RAG</div>
+      <!-- Khung chat panel -->
+      <div id="xoan-chat-panel">
+        <!-- Header -->
+        <div id="xoan-chat-header">
+          <button id="xoan-chat-close" aria-label="Đóng chatbot">×</button>
+          <div style="display:flex;align-items:center;gap:10px;padding-right:32px;">
+            <div style="width:38px;height:38px;border-radius:50%;background:#F4D39B;
+                        border:2px solid rgba(255,255,255,.6);flex-shrink:0;
+                        display:flex;align-items:center;justify-content:center;font-size:20px;">🧒🏻</div>
+            <div style="min-width:0;">
+              <div style="color:white;font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Hỏi đáp về Hát Xoan</div>
+              <div style="color:rgba(255,255,255,.75);font-size:11px;">Trợ lý di sản · Gemini + RAG</div>
             </div>
           </div>
         </div>
 
-        <div style="padding:12px 14px 4px;display:flex;gap:7px;flex-wrap:wrap;">
+        <!-- Thanh câu hỏi gợi ý (ngang gọn gàng) -->
+        <div id="xoan-quick-wrap">
           <button class="xoan-quick" data-q="Hát Xoan là gì?">Hát Xoan là gì?</button>
           <button class="xoan-quick" data-q="Có mấy chặng hát?">Có mấy chặng?</button>
           <button class="xoan-quick" data-q="UNESCO ghi danh Hát Xoan năm nào?">UNESCO ghi danh?</button>
           <button class="xoan-quick" data-q="Các làn điệu tiêu biểu của Hát Xoan?">Làn điệu nào?</button>
         </div>
 
-        <div id="xoan-messages"
-          style="height:270px;overflow-y:auto;padding:12px 14px;
-                 display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;">
-          <div style="align-self:flex-start;max-width:90%;">
+        <!-- Khung tin nhắn cuộn -->
+        <div id="xoan-messages">
+          <div style="align-self:flex-start;max-width:92%;">
             <div style="background:white;border:1px solid rgba(74,43,32,.1);
                         border-radius:16px 16px 16px 4px;
                         padding:10px 13px;font-size:13px;line-height:1.6;color:#291813;">
@@ -1238,14 +1223,15 @@
           </div>
         </div>
 
-        <div style="padding:10px 14px 14px;border-top:1px solid rgba(74,43,32,.07);">
+        <!-- Ô nhập câu hỏi -->
+        <div id="xoan-input-wrap">
           <div style="display:flex;align-items:center;gap:8px;
                       background:white;border:1px solid rgba(74,43,32,.14);
-                      border-radius:14px;padding:7px 7px 7px 13px;">
+                      border-radius:14px;padding:6px 6px 6px 12px;">
             <input id="xoan-chat-input" type="text"
               placeholder="Nhập câu hỏi về Hát Xoan..."
               style="flex:1;border:none;outline:none;background:transparent;
-                     font-size:13px;color:#291813;font-family:inherit;" />
+                     font-size:13.5px;color:#291813;font-family:inherit;" />
             <button id="xoan-chat-send" aria-label="Gửi câu hỏi"
               style="width:36px;height:36px;border-radius:11px;
                      background:#4A2B20;border:none;color:white;
@@ -1256,9 +1242,165 @@
       </div>
     `;
 
-    // Style cho nút quick + markdown trong bubble chat
+    // CSS tối ưu Responsive cho Chatbot
     const _qs = document.createElement('style');
-    _qs.textContent = `.xoan-quick{border-radius:18px;border:1px solid rgba(74,43,32,.14);background:white;padding:5px 12px;font-size:11.5px;cursor:pointer;font-family:inherit;transition:border-color .18s,background .18s;color:#4A2B20;} .xoan-quick:hover{border-color:#D8B873;background:#FBF5E5;}
+    _qs.textContent = `
+      #xoan-chat-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.4);
+        z-index: 9997;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+      #xoan-fab {
+        position: fixed;
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        right: 20px;
+        z-index: 9999;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: linear-gradient(135deg,#8B2F26,#A83A31);
+        border: 2.5px solid rgba(216,184,115,.7);
+        box-shadow: 0 8px 32px rgba(55,20,15,.38);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform .2s, box-shadow .2s;
+        color: white;
+        font-size: 26px;
+        outline: none;
+      }
+      #xoan-chat-panel {
+        display: none;
+        position: fixed;
+        z-index: 9998;
+        background: #FFFBF2;
+        font-family: 'Be Vietnam Pro', Arial, sans-serif;
+        box-shadow: 0 25px 70px rgba(40,15,10,.35);
+        flex-direction: column;
+        overflow: hidden;
+      }
+      #xoan-chat-header {
+        background: linear-gradient(90deg,#8B2F26,#A83A31);
+        position: relative;
+        flex-shrink: 0;
+      }
+      #xoan-chat-close {
+        position: absolute;
+        right: 12px;
+        top: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.16);
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .xoan-quick {
+        border-radius: 16px;
+        border: 1px solid rgba(74,43,32,.14);
+        background: white;
+        padding: 5px 12px;
+        font-size: 11.5px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color .18s, background .18s;
+        color: #4A2B20;
+        white-space: nowrap;
+      }
+      .xoan-quick:hover {
+        border-color: #D8B873;
+        background: #FBF5E5;
+      }
+
+      /* Giao diện Desktop / Tablet */
+      @media (min-width: 641px) {
+        #xoan-chat-panel {
+          bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+          right: 24px;
+          width: 380px;
+          max-height: min(580px, calc(100vh - 120px));
+          border-radius: 24px;
+          border: 1px solid rgba(216,184,115,.45);
+          animation: floatIn .22s ease both;
+        }
+        #xoan-chat-header { padding: 16px 20px; }
+        #xoan-quick-wrap {
+          padding: 10px 14px 4px;
+          display: flex;
+          gap: 7px;
+          flex-wrap: wrap;
+        }
+        #xoan-messages {
+          height: 280px;
+          overflow-y: auto;
+          padding: 12px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          scroll-behavior: smooth;
+        }
+        #xoan-input-wrap {
+          padding: 10px 14px 14px;
+          border-top: 1px solid rgba(74,43,32,.07);
+        }
+      }
+
+      /* Giao diện Mobile (Bottom Sheet - Tối ưu bàn phím ảo) */
+      @media (max-width: 640px) {
+        #xoan-chat-panel {
+          bottom: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          width: 100vw !important;
+          max-height: 75dvh !important;
+          border-radius: 22px 22px 0 0 !important;
+          border: 1px solid rgba(216,184,115,.45);
+          border-bottom: none !important;
+        }
+        #xoan-chat-header { padding: 12px 16px !important; }
+        #xoan-quick-wrap {
+          padding: 8px 12px 2px !important;
+          display: flex !important;
+          gap: 6px !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+        }
+        #xoan-quick-wrap::-webkit-scrollbar { display: none; }
+        .xoan-quick {
+          padding: 4px 10px !important;
+          font-size: 11px !important;
+          flex-shrink: 0 !important;
+        }
+        #xoan-messages {
+          flex: 1 1 auto !important;
+          height: auto !important;
+          min-height: 120px !important;
+          max-height: calc(75dvh - 150px) !important;
+          overflow-y: auto !important;
+          padding: 10px 14px !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+          scroll-behavior: smooth !important;
+        }
+        #xoan-input-wrap {
+          padding: 8px 12px calc(10px + env(safe-area-inset-bottom, 8px)) !important;
+          border-top: 1px solid rgba(74,43,32,.07);
+          background: #FFFBF2;
+        }
+      }
+
       .xoan-md p{margin:0 0 8px;} .xoan-md p:last-child{margin:0;}
       .xoan-md h4{font-size:13.5px;font-weight:700;color:#8B2F26;margin:10px 0 4px;}
       .xoan-md h5{font-size:12.8px;font-weight:600;color:#4A2B20;margin:8px 0 4px;}
@@ -1272,12 +1414,14 @@
       .xoan-md blockquote{border-left:3px solid #D8B873;margin:0 0 8px;padding:2px 0 2px 10px;color:rgba(41,24,19,.72);}
       .xoan-md a{color:#8B2F26;text-decoration:underline;}
       .xoan-cursor{display:inline-block;width:7px;height:13px;background:#8B2F26;margin-left:3px;vertical-align:-2px;border-radius:1px;animation:xoanBlink .9s steps(2,start) infinite;}
-      @keyframes xoanBlink{50%{opacity:0;}}`;
+      @keyframes xoanBlink{50%{opacity:0;}}
+    `;
     document.head.appendChild(_qs);
     document.body.appendChild(_chatWrap);
 
     const _fab = document.getElementById('xoan-fab');
     const _panel = document.getElementById('xoan-chat-panel');
+    const _backdrop = document.getElementById('xoan-chat-backdrop');
     const _close = document.getElementById('xoan-chat-close');
     const _msgs = document.getElementById('xoan-messages');
     const _input = document.getElementById('xoan-chat-input');
@@ -1288,15 +1432,41 @@
 
     function _togglePanel(open) {
       xoanChatOpen = open;
-      _panel.style.display = open ? 'block' : 'none';
-      if (open) { _input.focus(); _scrollMsgs(); }
+      _panel.style.display = open ? 'flex' : 'none';
+      if (_backdrop) _backdrop.style.display = (open && window.innerWidth <= 640) ? 'block' : 'none';
+      _fab.style.display = open ? 'none' : 'flex';
+      if (open) {
+        setTimeout(() => {
+          _input.focus();
+          _scrollMsgs();
+        }, 120);
+      }
     }
 
     _fab.addEventListener('click', () => _togglePanel(!xoanChatOpen));
     _close.addEventListener('click', () => _togglePanel(false));
-    document.getElementById('mobileChatBtn')?.addEventListener('click', () => _togglePanel(true));
+    if (_backdrop) _backdrop.addEventListener('click', () => _togglePanel(false));
 
-    function _scrollMsgs() { setTimeout(() => { _msgs.scrollTop = _msgs.scrollHeight; }, 40); }
+    // Xử lý khi bàn phím ảo trên điện thoại xuất hiện
+    _input.addEventListener('focus', () => {
+      setTimeout(() => {
+        _scrollMsgs();
+      }, 250);
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (xoanChatOpen && window.innerWidth <= 640) {
+          _scrollMsgs();
+        }
+      });
+    }
+
+    function _scrollMsgs() {
+      setTimeout(() => {
+        _msgs.scrollTop = _msgs.scrollHeight;
+      }, 50);
+    }
 
     // ---- Markdown renderer nhỏ, an toàn (escape HTML trước khi format) ----
     function _mdEsc(s) {
