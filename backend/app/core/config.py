@@ -27,5 +27,11 @@ _cors_raw = os.getenv(
 )
 CORS_ORIGINS: list[str] = [o.strip() for o in _cors_raw.split(",") if o.strip()]
 
-# Thư mục knowledge base
-KNOWLEDGE_DIR: Path = _ROOT / "data" / "knowledge"
+# Thư mục knowledge base (hỗ trợ cả chạy local lẫn deploy Cloud)
+_candidates = [
+    _ROOT / "data" / "knowledge",
+    Path(__file__).resolve().parents[2] / "data" / "knowledge",
+    Path("data/knowledge").resolve(),
+    Path("../data/knowledge").resolve(),
+]
+KNOWLEDGE_DIR: Path = next((p for p in _candidates if p.is_dir()), _candidates[0])
