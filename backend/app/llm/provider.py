@@ -46,17 +46,35 @@ def _user_message(query: str, chunks: List[Chunk]) -> str:
     )
 
 
-def _genai_client_and_config():
-    from google import genai  # type: ignore
+_client = None
+
+def _get_client():
+    global _client
+    if _client is None:
+        from google import genai  # type: ignore
+        _client = genai.Client(api_key=LLM_API_KEY)
+    return _client
+
+
+def _get_config():
     from google.genai import types  # type: ignore
 
-    client = genai.Client(api_key=LLM_API_KEY)
-    config = types.GenerateContentConfig(
-        system_instruction=_SYSTEM_PROMPT,
-        temperature=0.3,
-        max_output_tokens=_MAX_OUTPUT_TOKENS,
-    )
-    return client, config
+    cfg_kwargs = {
+        "system_instruction": _SYSTEM_PROMPT,
+        "temperature": 0.3,
+        "max_output_tokens": 1024,
+    }
+    # Tắt độ trễ thinking để trả token đầu tiên ngay lập tức (< 1s)
+    try:
+        cfg_kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+    except Exception:
+        pass
+
+    return types.GenerateContentConfig(**cfg_kwargs)
+
+
+def _genai_client_and_config():
+    return _get_client(), _get_config()
 
 
 async def generate_answer(query: str, chunks: List[Chunk]) -> str:
