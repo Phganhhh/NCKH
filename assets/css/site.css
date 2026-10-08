@@ -1,0 +1,458 @@
+
+/* CSS bổ sung cho phiên bản PHP nhiều trang */
+.page-intro{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    padding-top:145px!important;
+    padding-bottom:70px!important;
+    background:linear-gradient(120deg,#291813,#6e2a23);
+    color:white;
+}
+
+.page-intro::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url("../../images/nen.png") center center / cover no-repeat;
+    opacity:.22;
+    z-index:-2;
+}
+
+.page-intro::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        120deg,
+        rgba(41,24,19,.78),
+        rgba(110,42,35,.68)
+    );
+    z-index:-1;
+}
+
+.page-intro > div{
+    position:relative;
+    z-index:1;
+}
+.tour-feature{transition:.2s}
+.tour-feature:hover{transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(45,22,14,.12)}
+.sticky-tour{position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:rgba(32,18,14,.96);
+    padding:10px 12px;color:#fff;border-top:1px solid rgba(216,184,115,.25);backdrop-filter:blur(10px)}
+.sticky-tour a{display:block;max-width:900px;
+    margin:auto;text-align:center;
+    border-radius:14px;
+    background:#9B332C;padding:12px;font-weight:800}
+.ar-screen{position:relative;min-height:calc(100vh - 76px);
+    background:#111;color:#fff;overflow:hidden}
+.ar-screen video{position:absolute;
+    inset:0;width:100%;height:100%;object-fit:cover}
+.ar-overlay{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 45%,rgba(0,0,0,.72))}
+.ar-content{position:relative;z-index:2;min-height:calc(100vh - 76px);display:flex;flex-direction:column;justify-content:space-between;padding:20px}
+.portal{width:min(340px,82vw);aspect-ratio:.65;margin:auto;border:3px solid #D8B873;
+    border-radius:180px 180px 20px 20px;background:linear-gradient(180deg,rgba(216,184,115,.1),rgba(155,51,44,.2));box-shadow:0 0 55px rgba(216,184,115,.25);position:relative}
+.portal:before{content:'ĐÌNH LÃI LÈN';
+    position:absolute;top:20px;left:50%;transform:translateX(-50%);white-space:nowrap;
+    font:600 15px 'Noto Serif',serif;color:#f7eac7}
+    .token{position:absolute;right:10%;top:36%;width:72px;height:72px;border-radius:50%;
+        background:radial-gradient(circle,#fff3c0 0 25%,#D8B873 35%,#8B2F26 62%,transparent 64%);
+        box-shadow:0 0 30px rgba(216,184,115,.8);
+        display:grid;place-items:center;color:#291813;
+        font-size:26px;cursor:pointer;animation:floatToken 2s ease-in-out infinite}
+        @keyframes floatToken{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+        .popup-bg{position:fixed;inset:0;z-index:120;
+            background:rgba(15,7,5,.7);display:flex;align-items:center;justify-content:center;padding:20px}
+            .popup{width:min(340px,100%);background:#fff9ed;color:#291813;border-radius:26px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.4)}
+            .tour-banner h1{
+                font-family:"Dancing Script", cursive;
+                font-weight:700;
+                font-size:clamp(50px, 8vw, 100px);
+                line-height:1;
+                color:#F8EAC8;
+                text-shadow:0 10px 30px rgba(0,0,0,.35);
+                margin-top:14px;
+            }
+            .tour-hero-desc{
+                font-family:"Noto Serif", Georgia, serif;
+                color:rgba(255,255,255,.92);
+                max-width:800px;
+                font-size:clamp(16px, 2vw, 22px);
+                line-height:1.7;
+                margin-top:22px;
+            }
+            .benefit-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+            .benefit{background:#fff;border:1px solid #e6dac9;border-radius:28px;padding:28px}
+            .benefit-item{display:flex;gap:13px;margin:18px 0}
+            .benefit-icon{flex:none;width:40px;height:40px;border-radius:13px;background:#efe0bc;display:grid;place-items:center}
+            .fomo{border:2px solid #9b332c;background:#fff4f2;padding:20px;border-radius:22px}
+            .progress{height:12px;background:#eaded0;border-radius:999px;overflow:hidden}
+            .progress>span{display:block;width:83%;height:100%;background:linear-gradient(90deg,#9b332c,#d85f4a)}
+            .voucher{background:linear-gradient(135deg,#fff7db,#eedca9);border:1px dashed #aa7c2a}
+            .tour-form{background:#fff;border:1px solid #e6dac9;border-radius:28px;padding:28px}
+            .field{margin-bottom:14px}.field label{font-weight:700;font-size:13px}
+            .field input,.field textarea,
+            .field select{display:block;width:100%;margin-top:6px;border:1px solid #d8ccb9;border-radius:11px;padding:12px;background:white}
+            .hide{display:none!important}@media(max-width:900px){
+                .benefit-grid{grid-template-columns:1fr}}@media(max-width:767px){
+                    .page-intro{padding-top:120px!important}
+                    .tour-banner{padding:70px 5% 50px}
+                    .mobile-bottom{padding-bottom:80px}
+                    .benefit-grid{grid-template-columns:1fr}}
+            .float-in{
+                animation:floatIn 1.2s cubic-bezier(.22,.61,.36,1) both;
+            }
+
+            @keyframes floatIn{
+                from{
+                    opacity:0;
+                    transform:translateY(28px);
+                }
+                to{
+                    opacity:1;
+                    transform:translateY(0);
+                }
+            }
+
+            .delay-1{
+                animation-delay:.05s;
+            }
+
+            .delay-2{
+                animation-delay:.25s;
+            }
+
+            .delay-3{
+                animation-delay:.45s;
+            }
+
+            .tour-hero-desc{
+                font-family:"Noto Serif", Georgia, serif;
+                color:rgba(255,255,255,.92);
+                max-width:800px;
+                font-size:clamp(16px,2vw,22px);
+                line-height:1.7;
+                margin-top:22px;
+            }
+            /* =========================
+   CHATBOT POPUP
+========================= */
+
+.chatbot-fab {
+    position: fixed;
+    right: 22px;
+    bottom: 24px;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: #9B332C;
+    color: white;
+    cursor: pointer;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 12px 30px rgba(41,24,19,.28);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.chatbot-fab:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(41,24,19,.34);
+}
+
+.chatbot-fab-icon {
+    font-size: 25px;
+}
+
+.chatbot-fab-label {
+    position: absolute;
+    right: 68px;
+
+    background: #291813;
+    color: white;
+
+    padding: 8px 12px;
+    border-radius: 10px;
+
+    white-space: nowrap;
+    font-size: 12px;
+
+    opacity: 0;
+    transform: translateX(8px);
+
+    pointer-events: none;
+    transition: .2s;
+}
+
+.chatbot-fab:hover .chatbot-fab-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* KHUNG CHAT */
+
+.chatbot-panel {
+    position: fixed;
+    right: 22px;
+    bottom: 94px;
+
+    width: 360px;
+    max-width: calc(100vw - 30px);
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(41,24,19,.25);
+
+    z-index: 9998;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(15px)
+        scale(.96);
+
+    transform-origin: bottom right;
+
+    transition: .2s;
+}
+
+
+/* Khi mở */
+
+.chatbot-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* HEADER CHAT */
+
+.chatbot-head {
+    background: linear-gradient(
+        135deg,
+        #291813,
+        #6e2a23
+    );
+
+    color: white;
+
+    padding: 15px 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatbot-head-title {
+    font-family:
+        'Noto Serif',
+        Georgia,
+        serif;
+
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.chatbot-head-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.68);
+
+    margin-top: 2px;
+}
+
+.chatbot-close {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    background:
+        rgba(255,255,255,.08);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+
+/* NỘI DUNG CHAT */
+
+.chatbot-body {
+    height: 300px;
+
+    overflow-y: auto;
+
+    padding: 14px;
+
+    background: #fffaf1;
+}
+
+.chatbot-message {
+    max-width: 82%;
+
+    border-radius: 17px;
+
+    padding: 10px 12px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    margin-top: 9px;
+}
+
+.chatbot-message:first-child {
+    margin-top: 0;
+}
+
+.chatbot-message.bot {
+    background: #f0e4cb;
+    color: #291813;
+}
+
+.chatbot-message.user {
+    margin-left: auto;
+
+    background: #9b332c;
+    color: white;
+}
+
+
+/* CÂU HỎI GỢI Ý */
+
+.chatbot-quick {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+
+    padding: 10px 14px;
+
+    background: #fffaf1;
+}
+
+.chatbot-quick button {
+    border:
+        1px solid #dac9ab;
+
+    background: white;
+
+    color: #6e2a23;
+
+    border-radius: 999px;
+
+    padding: 7px 10px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* Ô NHẬP */
+
+.chatbot-compose {
+    padding: 12px 14px 14px;
+
+    background: white;
+
+    border-top:
+        1px solid #eee4d6;
+
+    display: flex;
+    gap: 8px;
+}
+
+.chatbot-input {
+    min-width: 0;
+    flex: 1;
+
+    border:
+        1px solid #d8ccb9;
+
+    border-radius: 999px;
+
+    padding: 11px 14px;
+
+    background: white;
+
+    font-size: 13px;
+
+    outline: none;
+}
+
+.chatbot-input:focus {
+    border-color: #9b332c;
+}
+
+.chatbot-send {
+    border: none;
+
+    border-radius: 999px;
+
+    background: #291813;
+
+    color: white;
+
+    padding: 0 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    .chatbot-fab {
+        right: 16px;
+        bottom: 78px;
+
+        width: 54px;
+        height: 54px;
+    }
+
+    .chatbot-fab-label {
+        display: none;
+    }
+
+    .chatbot-panel {
+        right: 12px;
+        bottom: 144px;
+
+        width:
+            calc(100vw - 24px);
+    }
+
+    .chatbot-body {
+        height: 42vh;
+    }
+}
+
+

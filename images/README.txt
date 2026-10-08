@@ -1,0 +1,1 @@
+Chép thư mục images của web gốc vào đây.
